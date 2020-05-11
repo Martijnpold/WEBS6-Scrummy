@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "scrummy-fa053": {
+      "hosting": {
+        "my-app": [
+          "scrummy-fa053"
+        ]
+      }
+    }
+  }
+}

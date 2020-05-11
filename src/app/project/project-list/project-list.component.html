@@ -1,0 +1,7 @@
+<h2>Courses</h2>
+
+<table>
+  <tr *ngFor="let project of projects$ | async">
+    <td>{{project.name}}</td>
+  </tr>
+</table>
