@@ -2,6 +2,6 @@
 
 <table>
   <tr *ngFor="let project of projects$ | async">
-    <td>{{project.name}}</td>
+    <app-project-item [project]="project"></app-project-item>
   </tr>
 </table>
