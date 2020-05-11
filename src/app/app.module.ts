@@ -9,19 +9,25 @@ import { AppComponent } from './app.component';
 import { ProjectListComponent } from './project/project-list/project-list.component';
 import { ProjectItemComponent } from './project/project-item/project-item.component';
 import { environment } from '../environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppMaterialModule } from './app-material.module';
+import { ToolbarComponent } from './core/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ToolbarComponent,
     ProjectListComponent,
-    ProjectItemComponent
+    ProjectItemComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AppMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

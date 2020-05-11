@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { Observable } from 'rxjs';
+import { Project } from '../project';
 
 @Component({
   selector: 'app-project-list',
@@ -8,16 +9,12 @@ import { Observable } from 'rxjs';
   styleUrls: ['./project-list.component.scss']
 })
 export class ProjectListComponent implements OnInit {
-  projects$: Observable<any>;
+  projects$: Observable<Project[]>;
 
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
     this.projects$ = this.projectService.getAll();
-    console.log(this.projectService.getAll());
-    this.projects$.subscribe((a) => {
-      console.log(a);
-    })
   }
 
 }
