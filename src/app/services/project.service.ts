@@ -35,10 +35,12 @@ export class ProjectService {
   }
 
   public update(project: Project) {
-    this.firestore.collection('projects').doc(project.id).update(project);
+    const { id, ...obj } = project;
+    this.firestore.collection('projects').doc(id).update(obj);
   }
 
   public create(project: Project) {
-    this.firestore.collection('projects').add(project);
+    const { id, ...obj } = project;
+    this.firestore.collection('projects').add(obj);
   }
 }

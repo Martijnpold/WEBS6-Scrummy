@@ -15,6 +15,7 @@ import { ToolbarComponent } from './core/toolbar/toolbar.component';
 import { LoginComponent } from './core/login/login.component';
 import { RegisterComponent } from './core/register/register.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ProjectCreateComponent } from './project/project-create/project-create.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
     ProjectItemComponent,
     LoginComponent,
     RegisterComponent,
+    ProjectCreateComponent,
   ],
   imports: [
     BrowserModule,

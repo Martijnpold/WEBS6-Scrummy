@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProjectListComponent } from './project/project-list/project-list.component';
 import { LoginComponent } from './core/login/login.component';
 import { RegisterComponent } from './core/register/register.component';
+import { ProjectCreateComponent } from './project/project-create/project-create.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'projects',
     component: ProjectListComponent
+  },
+  {
+    path: 'debug',
+    component: ProjectCreateComponent
   },
 ];
 
