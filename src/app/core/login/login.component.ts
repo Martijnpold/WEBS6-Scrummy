@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit {
     if (password.hasError('minlength')) return 'Password should be at least 6 characters long';
     return '';
   }
+  
+  submitEnter($event: KeyboardEvent) {
+    $event.stopPropagation();
+  }
 
   login() {
     if (this.loginForm.valid) {

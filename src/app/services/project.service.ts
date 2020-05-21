@@ -25,6 +25,15 @@ export class ProjectService {
     return this.projects$;
   }
 
+  public get(id: string) {
+    this.firestore.collection('projects').doc(id)
+      .snapshotChanges()
+      .pipe(map((project: any) => {
+        const doc = project.payload.doc;
+        return Project.fromDoc(doc.id, doc.data());
+      }));
+  }
+
   public update(project: Project) {
     this.firestore.collection('projects').doc(project.id).update(project);
   }

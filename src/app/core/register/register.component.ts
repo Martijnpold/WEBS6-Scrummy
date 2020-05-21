@@ -35,6 +35,10 @@ export class RegisterComponent implements OnInit {
     return '';
   }
 
+  submitEnter($event: KeyboardEvent) {
+    $event.stopPropagation();
+  }
+
   register() {
     if (this.registerForm.valid) {
       this.auth.register(this.registerForm.get('email').value, this.registerForm.get('password').value).then(c => {
