@@ -1,1 +1,16 @@
-<p>toolbar works!</p>
+<mat-toolbar color="primary">
+    <button mat-flat-button color="primary" [routerLink]="'/'">
+        <mat-icon fontSet="fa" fontIcon="fa-seedling"></mat-icon>
+        Scrummy
+    </button>
+
+    <button mat-flat-button color="primary" [routerLink]="'/projects'">
+        Projects
+    </button>
+
+    <span class="fill-remaining-space"></span>
+
+    <button mat-flat-button color="primary" [routerLink]="'/projects'">
+        Log in
+    </button>
+</mat-toolbar>
