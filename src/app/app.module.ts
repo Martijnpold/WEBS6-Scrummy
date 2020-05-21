@@ -12,6 +12,9 @@ import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material.module';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
+import { LoginComponent } from './core/login/login.component';
+import { RegisterComponent } from './core/register/register.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,8 @@ import { ToolbarComponent } from './core/toolbar/toolbar.component';
     ToolbarComponent,
     ProjectListComponent,
     ProjectItemComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +33,9 @@ import { ToolbarComponent } from './core/toolbar/toolbar.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AppMaterialModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

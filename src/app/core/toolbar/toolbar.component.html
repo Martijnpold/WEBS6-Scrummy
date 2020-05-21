@@ -10,7 +10,18 @@
 
     <span class="fill-remaining-space"></span>
 
-    <button mat-flat-button color="primary" [routerLink]="'/projects'">
-        Log in
-    </button>
+    <div *ngIf="(user$ | async) == null; then loginBlock else logoutBlock"></div>
+    <ng-template #loginBlock>
+        <button mat-flat-button color="primary" [routerLink]="'/login'">
+            Login
+        </button>
+        <button mat-flat-button color="primary" [routerLink]="'/register'">
+            Register
+        </button>
+    </ng-template>
+    <ng-template #logoutBlock>
+        <button mat-flat-button color="primary" (click)="logout()">
+            Logout
+        </button>
+    </ng-template>
 </mat-toolbar>
