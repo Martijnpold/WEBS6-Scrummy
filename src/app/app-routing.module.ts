@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProjectListComponent } from './project/project-list/project-list.component';
+import { ProjectListComponent } from './core/project/project-list/project-list.component';
 import { LoginComponent } from './core/login/login.component';
 import { RegisterComponent } from './core/register/register.component';
-import { ProjectCreateComponent } from './project/project-create/project-create.component';
+import { ProjectCreateComponent } from './core/project/project-create/project-create.component';
 
 
 const routes: Routes = [

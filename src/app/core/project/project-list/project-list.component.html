@@ -1,0 +1,15 @@
+<div class="mat-elevation-z8 project-table-container">
+  <table mat-table [dataSource]="dataSource" matSort class="project-table">
+
+    <ng-container *ngFor="let set of displayedColumns" matColumnDef="{{set.id}}">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{set.name}}</th>
+      <td mat-cell *matCellDef="let row"> {{row[set.id]}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="getColumnNames()"></tr>
+    <tr mat-row *matRowDef="let row; columns: getColumnNames();">
+    </tr>
+  </table>
+
+  <mat-paginator [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
