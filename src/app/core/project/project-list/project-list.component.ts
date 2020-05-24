@@ -29,7 +29,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource<Project>();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    
+
     this.projects$ = this.projectService.getAll();
     this.subscription = this.projects$.subscribe(a => {
       this.dataSource.data = a
@@ -41,8 +41,10 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   }
 
   getColumnNames() {
-    return this.displayedColumns.map(a => {
+    var dp = this.displayedColumns.map(a => {
       return a.id
     });
+    dp.push('controls');
+    return dp;
   }
 }
