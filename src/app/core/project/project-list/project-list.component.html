@@ -1,3 +1,14 @@
 <div *ngFor="let project of projects$ | async">
   <app-project-item [project]="project"></app-project-item>
 </div>
+
+<mat-card *ngIf="(projects$ | async)?.length == 0" class="small-spacer">
+  <ng-template [ngIf]="(auth.getUser() | async) != null" [ngIfElse]="loggedOut">
+    <mat-card-title>No projects here yet</mat-card-title>
+    <mat-card-subtitle>Click the button below to create one!</mat-card-subtitle>
+  </ng-template>
+  <ng-template #loggedOut>
+    <mat-card-title>No projects here yet</mat-card-title>
+    <mat-card-subtitle>Log in to create one!</mat-card-subtitle>
+  </ng-template>
+</mat-card>

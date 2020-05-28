@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, switchMap, flatMap } from 'rxjs/operators';
 import { Project } from '../model/project';
 import { AuthService } from './auth.service';
@@ -14,17 +14,20 @@ export class ProjectService {
   constructor(private firestore: AngularFirestore, private auth: AuthService) {
     this.projects$ = this.auth.getUser()
       .pipe(flatMap((user) => {
-        return this.firestore.collection('projects')
-          .snapshotChanges()
-          .pipe(map((projects: any[]) => {
-            return projects
-              .map(project => {
-                const doc = project.payload.doc;
-                const obj = Project.fromDoc(doc.id, doc.data());
-                return (obj.members.includes(user.uid)) ? obj : null;
-              })
-              .filter(x => x != null);
-          }));
+        if (user) {
+          return this.firestore.collection('projects')
+            .snapshotChanges()
+            .pipe(map((projects: any[]) => {
+              return projects
+                .map(project => {
+                  const doc = project.payload.doc;
+                  const obj = Project.fromDoc(doc.id, doc.data());
+                  return (obj.members.includes(user.uid)) ? obj : null;
+                })
+                .filter(x => x != null);
+            }));
+        }
+        return of([]);
       }));
   }
 
@@ -35,13 +38,16 @@ export class ProjectService {
   public get(id: string): Observable<Project> {
     return this.auth.getUser()
       .pipe(flatMap((user) => {
-        return this.firestore.collection('projects').doc(id)
-          .snapshotChanges()
-          .pipe(map((project: any) => {
-            const doc = project.payload.doc;
-            const obj = Project.fromDoc(doc.id, doc.data());
-            return (obj.members.includes(user.uid)) ? obj : null;
-          }));
+        if (user) {
+          return this.firestore.collection('projects').doc(id)
+            .snapshotChanges()
+            .pipe(map((project: any) => {
+              const doc = project.payload.doc;
+              const obj = Project.fromDoc(doc.id, doc.data());
+              return (obj.members.includes(user.uid)) ? obj : null;
+            }));
+        }
+        return of(null);
       }));
   }
 
