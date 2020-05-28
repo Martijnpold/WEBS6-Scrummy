@@ -14,4 +14,7 @@ export class ProjectItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  click() {
+    console.log("click")
+  }
 }

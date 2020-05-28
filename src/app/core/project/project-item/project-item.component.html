@@ -1,4 +1,4 @@
-<mat-card class="small-spacer">
-    <mat-card-title>{{ project.name }}</mat-card-title>
+<mat-card class="small-spacer" (click)="click()">
+    <mat-card-title><mat-icon fontSet="fa" fontIcon="fa-folder-open"></mat-icon> {{ project.name }}</mat-card-title>
     <mat-card-subtitle>{{ project.description }}</mat-card-subtitle>
 </mat-card>
