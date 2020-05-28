@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/model/project';
-import { Router } from '@angular/router';
+import { User } from 'firebase';
+import { MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from 'src/app/services/auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-project-create',
@@ -9,24 +13,43 @@ import { Router } from '@angular/router';
   styleUrls: ['./project-create.component.scss']
 })
 export class ProjectCreateComponent implements OnInit {
+  createForm = new FormGroup({
+    'name': new FormControl('', [Validators.required]),
+    'description': new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
+  });
+  formSubscription: Subscription;
 
-  constructor(private projectService: ProjectService, private router: Router) { }
+  constructor(public auth: AuthService, private projectService: ProjectService, private dialogRef: MatDialogRef<ProjectCreateComponent>) { }
 
   ngOnInit(): void {
-    // this.projectService.getAll().subscribe(all => {
-    //   all.forEach(e => {
-    //     if(e.name === 'New Project') {
-    //       e.name = "New Project Updated";
-    //       this.projectService.update(e);
-    //     }
-    //   });
-    // })
-    
-    // const project = new Project();
-    // project.name = "New Project";
-    // this.projectService.create(project);
-    
-    this.router.navigate(['/']);
   }
 
+  getNameErrorMessage() {
+    const name = this.createForm.get('name');
+    if (name.hasError('required')) return 'You must enter a value';
+    return '';
+  }
+
+  getDescriptionErrorMessage() {
+    const description = this.createForm.get('description');
+    if (description.hasError('required')) return 'You must enter a value';
+    if (description.hasError('minlength')) return 'Descriptions should be at least 20 characters long';
+    if (description.hasError('maxlength')) return 'Descriptions should be at max 100 characters long';
+    return '';
+  }
+
+  submitEnter($event: KeyboardEvent) {
+    $event.stopPropagation();
+  }
+
+  create(user: User) {
+    if (this.createForm.valid) {
+      const project = new Project();
+      project.name = this.createForm.get('name').value;
+      project.description = this.createForm.get('description').value;
+      project.members = [user.uid]
+      this.projectService.create(project);
+      this.dialogRef.close();
+    }
+  }
 }

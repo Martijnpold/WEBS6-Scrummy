@@ -4,6 +4,9 @@ import { ProjectListComponent } from './core/project/project-list/project-list.c
 import { LoginComponent } from './core/login/login.component';
 import { RegisterComponent } from './core/register/register.component';
 import { ProjectCreateComponent } from './core/project/project-create/project-create.component';
+import { ProjectsPageComponent } from './page/projects-page/projects-page.component';
+import { RegisterPageComponent } from './page/register-page/register-page.component';
+import { LoginPageComponent } from './page/login-page/login-page.component';
 
 
 const routes: Routes = [
@@ -14,15 +17,15 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginPageComponent
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterPageComponent
   },
   {
     path: 'projects',
-    component: ProjectListComponent
+    component: ProjectsPageComponent
   },
   {
     path: 'debug',

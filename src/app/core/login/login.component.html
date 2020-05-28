@@ -1,36 +1,33 @@
-<div class="filler">
-    <div class="main-div">
-        <mat-card class="login-card">
-            <mat-card-title>Login</mat-card-title>
-            <mat-card-content>
-                <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
-                    <table class="login-full-width" cellspacing="0">
-                        <tr>
-                            <td>
-                                <mat-form-field class="login-full-width">
-                                    <mat-label>Email</mat-label>
-                                    <input matInput type="email" formControlName="email" (keydown.enter)="submitEnter($event)">
-                                    <mat-error>
-                                        {{ getEmailErrorMessage() }}
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <mat-form-field class="login-full-width">
-                                    <mat-label>Password</mat-label>
-                                    <input matInput type="password" formControlName="password" (keydown.enter)="submitEnter($event)">
-                                    <mat-error>
-                                        {{ getPasswordErrorMessage() }}
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                        </tr>
-                    </table>
-                    <button mat-raised-button color="primary">Login</button>
-                </form>
-            </mat-card-content>
-        </mat-card>
-    </div>
-</div>
+<mat-card class="login-card">
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+            <table class="login-full-width" cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field class="login-full-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" formControlName="email" (keydown.enter)="submitEnter($event)">
+                            <mat-error>
+                                {{ getEmailErrorMessage() }}
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="login-full-width">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" formControlName="password"
+                                (keydown.enter)="submitEnter($event)">
+                            <mat-error>
+                                {{ getPasswordErrorMessage() }}
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+            <button mat-raised-button color="primary">Login</button>
+        </form>
+    </mat-card-content>
+</mat-card>

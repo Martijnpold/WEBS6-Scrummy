@@ -16,6 +16,9 @@ import { LoginComponent } from './core/login/login.component';
 import { RegisterComponent } from './core/register/register.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ProjectCreateComponent } from './core/project/project-create/project-create.component';
+import { ProjectsPageComponent } from './page/projects-page/projects-page.component';
+import { LoginPageComponent } from './page/login-page/login-page.component';
+import { RegisterPageComponent } from './page/register-page/register-page.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { ProjectCreateComponent } from './core/project/project-create/project-cr
     LoginComponent,
     RegisterComponent,
     ProjectCreateComponent,
+    ProjectsPageComponent,
+    LoginPageComponent,
+    RegisterPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,14 +9,14 @@ import { AuthService } from '../../services/auth.service';
 export class ToolbarComponent implements OnInit {
   public user$;
 
-  constructor(private authService: AuthService) {
-    this.user$ = authService.getUser();
+  constructor(private auth: AuthService) {
+    this.user$ = auth.getUser();
   }
 
   ngOnInit(): void {
   }
 
   logout() {
-    this.authService.logout();
+    this.auth.logout();
   }
 }
