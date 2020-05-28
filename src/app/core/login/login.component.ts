@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
     'email': new FormControl('', [Validators.required, Validators.email]),
-    'password': new FormControl('', [Validators.required, Validators.minLength(6)]),
+    'password': new FormControl('', [Validators.required]),
   });
 
   constructor(private auth: AuthService, private router: Router, private toastr: ToastrService) {
@@ -32,10 +32,9 @@ export class LoginComponent implements OnInit {
   getPasswordErrorMessage() {
     const password = this.loginForm.get('password');
     if (password.hasError('required')) return 'You must enter a value';
-    if (password.hasError('minlength')) return 'Password should be at least 6 characters long';
     return '';
   }
-  
+
   submitEnter($event: KeyboardEvent) {
     $event.stopPropagation();
   }
