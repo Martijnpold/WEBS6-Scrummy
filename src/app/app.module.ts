@@ -19,6 +19,7 @@ import { ProjectCreateComponent } from './core/project/project-create/project-cr
 import { ProjectsPageComponent } from './page/projects-page/projects-page.component';
 import { LoginPageComponent } from './page/login-page/login-page.component';
 import { RegisterPageComponent } from './page/register-page/register-page.component';
+import { ProjectDetailComponent } from './core/project/project-detail/project-detail.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { RegisterPageComponent } from './page/register-page/register-page.compon
     ProjectsPageComponent,
     LoginPageComponent,
     RegisterPageComponent,
+    ProjectDetailComponent,
   ],
   imports: [
     BrowserModule,

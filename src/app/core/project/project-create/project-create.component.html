@@ -21,6 +21,6 @@
 
     <mat-dialog-actions align="end">
         <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button [disabled]="!createForm.valid" *ngIf="auth.user$ | async as user" (click)="create(user)" cdkFocusInitial>Create</button>
+        <button mat-button [disabled]="!createForm.valid" *ngIf="auth.getUser() | async as user" (click)="create(user)" cdkFocusInitial>Create</button>
     </mat-dialog-actions>
 </div>

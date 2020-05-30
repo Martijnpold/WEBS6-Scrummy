@@ -1,18 +1,29 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { User } from 'firebase';
-import { Subject, Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ScrummyUser } from '../model/scrummy-user';
+import { map, flatMap } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
+import { ScrummyUserService } from './scrummy-user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private user$: Observable<ScrummyUser>;
 
+  constructor(private firestore: AngularFirestore, private susers: ScrummyUserService, private auth: AngularFireAuth) {
+    this.user$ = this.auth.user
+      .pipe(flatMap(user => {
+        if (user) {
+          return this.susers.getScrummyUser(user.uid);
+        }
+        return of(null);
+      }));;
+  }
 
-  public user$: Observable<User>;
-
-  constructor(private auth: AngularFireAuth) {
-    this.user$ = auth.user
+  getFireUser() {
+    return this.auth.user;
   }
 
   getUser() {
@@ -27,7 +38,17 @@ export class AuthService {
     return this.auth.signOut();
   }
 
-  register(email: string, password: string) {
-    return this.auth.createUserWithEmailAndPassword(email, password);
+  register(displayName: string, email: string, password: string) {
+    return new Promise((resolve, reject) => {
+      this.auth.createUserWithEmailAndPassword(email, password).then(user => {
+        const scrummy_user = new ScrummyUser();
+        scrummy_user.displayName = displayName;
+        this.firestore.collection('users').doc(user.user.uid).set({ ...scrummy_user });
+        resolve(scrummy_user);
+      }).catch(reason => {
+        console.log(reason);
+        reject(reason);
+      })
+    })
   }
 }

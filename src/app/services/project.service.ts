@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
-import { map, switchMap, flatMap } from 'rxjs/operators';
+import { Observable, of, from, forkJoin, pipe } from 'rxjs';
+import { map, switchMap, flatMap, mergeMap } from 'rxjs/operators';
 import { Project } from '../model/project';
 import { AuthService } from './auth.service';
+import { ScrummyUserService } from './scrummy-user.service';
+import { ScrummyUser } from '../model/scrummy-user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  private projects$: Observable<Project[]>;
 
-  constructor(private firestore: AngularFirestore, private auth: AuthService) {
-    this.projects$ = this.auth.getUser()
+  constructor(private firestore: AngularFirestore, private susers: ScrummyUserService, private auth: AuthService) {
+  }
+
+  public getAll(): Observable<Project[]> {
+    return this.auth.getUser()
       .pipe(flatMap((user) => {
         if (user) {
           return this.firestore.collection('projects')
@@ -22,7 +26,7 @@ export class ProjectService {
                 .map(project => {
                   const doc = project.payload.doc;
                   const obj = Project.fromDoc(doc.id, doc.data());
-                  return (obj.members.includes(user.uid)) ? obj : null;
+                  return (obj.members.includes(user.id)) ? obj : null;
                 })
                 .filter(x => x != null);
             }));
@@ -31,37 +35,47 @@ export class ProjectService {
       }));
   }
 
-  public getAll(): Observable<Project[]> {
-    return this.projects$;
-  }
-
   public get(id: string): Observable<Project> {
     return this.auth.getUser()
       .pipe(flatMap((user) => {
         if (user) {
           return this.firestore.collection('projects').doc(id)
-            .snapshotChanges()
+            .valueChanges()
             .pipe(map((project: any) => {
-              const doc = project.payload.doc;
-              const obj = Project.fromDoc(doc.id, doc.data());
-              return (obj.members.includes(user.uid)) ? obj : null;
+              const obj = Project.fromDoc(id, project);
+              return (obj.members.includes(user.id)) ? obj : null;
             }));
+        } else {
+          return of(null);
         }
-        return of(null);
       }));
   }
 
-  public update(project: Project) {
-    const { id, ...obj } = project;
-    this.firestore.collection('projects').doc(id).update(obj);
+  public getMembers(project: Project): Observable<ScrummyUser[]> {
+    return this.get(project.id).pipe(
+      map(project => {
+
+      })
+    )
   }
 
-  public create(project: Project) {
-    const { id, ...obj } = project;
-    this.firestore.collection('projects').add(obj);
+  public getMembers$(project$): Observable<ScrummyUser[]> {
+    return project$.pipe(project => {
+      return this.getMembers(project);
+    })
   }
 
-  public delete(project: Project) {
-    this.firestore.collection('projects').doc(project.id).delete();
+  public update(project: Project): Promise<void> {
+    const { id, ...obj } = project;
+    return this.firestore.collection('projects').doc(id).update(obj);
+  }
+
+  public create(project: Project): Promise<any> {
+    const { id, ...obj } = project;
+    return this.firestore.collection('projects').add(obj);
+  }
+
+  public delete(project: Project): Promise<void> {
+    return this.firestore.collection('projects').doc(project.id).delete();
   }
 }

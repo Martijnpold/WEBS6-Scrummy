@@ -1,5 +1,5 @@
 <app-project-list></app-project-list>
-<div class="small-spacer" *ngIf="auth.user$ | async">
+<div class="small-spacer" *ngIf="auth.getUser() | async">
     <button mat-raised-button color="accent" (click)="openCreateDialog()">
         <mat-icon fontSet="fa" fontIcon="fa-plus" class="button-icon"></mat-icon>
     </button>

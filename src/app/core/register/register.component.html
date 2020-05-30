@@ -6,6 +6,17 @@
                 <tr>
                     <td>
                         <mat-form-field class="login-full-width">
+                            <mat-label>Display Name (Publicly Visible)</mat-label>
+                            <input matInput formControlName="displayName" (keydown.enter)="submitEnter($event)">
+                            <mat-error>
+                                {{ getDisplayNameErrorMessage() }}
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="login-full-width">
                             <mat-label>Email</mat-label>
                             <input matInput type="email" formControlName="email" (keydown.enter)="submitEnter($event)">
                             <mat-error>

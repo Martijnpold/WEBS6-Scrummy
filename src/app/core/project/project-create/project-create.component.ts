@@ -6,6 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ScrummyUser } from 'src/app/model/scrummy-user';
 
 @Component({
   selector: 'app-project-create',
@@ -42,12 +43,12 @@ export class ProjectCreateComponent implements OnInit {
     $event.stopPropagation();
   }
 
-  create(user: User) {
+  create(user: ScrummyUser) {
     if (this.createForm.valid) {
       const project = new Project();
       project.name = this.createForm.get('name').value;
       project.description = this.createForm.get('description').value;
-      project.members = [user.uid]
+      project.members = [user.id]
       this.projectService.create(project);
       this.dialogRef.close();
     }

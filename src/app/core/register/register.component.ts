@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
   registerForm = new FormGroup({
+    'displayName': new FormControl('', [Validators.required, Validators.minLength(4)]),
     'email': new FormControl('', [Validators.required, Validators.email]),
     'password': new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
@@ -19,6 +20,13 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  getDisplayNameErrorMessage() {
+    const displayName = this.registerForm.get('displayName');
+    if (displayName.hasError('required')) return 'You must enter a value';
+    if (displayName.hasError('minlength')) return 'Display Name should be at least 4 characters long';
+    return '';
   }
 
   getEmailErrorMessage() {
@@ -41,7 +49,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.valid) {
-      this.auth.register(this.registerForm.get('email').value, this.registerForm.get('password').value).then(c => {
+      this.auth.register(this.registerForm.get('displayName').value, this.registerForm.get('email').value, this.registerForm.get('password').value).then(c => {
         this.toastr.success('You have been registered!');
         this.router.navigate(['/']);
       }).catch(r => {

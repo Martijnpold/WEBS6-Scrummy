@@ -7,10 +7,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-  public user$;
 
-  constructor(private auth: AuthService) {
-    this.user$ = auth.getUser();
+  constructor(public auth: AuthService) {
   }
 
   ngOnInit(): void {

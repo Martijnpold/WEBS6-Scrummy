@@ -3,11 +3,11 @@ export class Project {
     name: string;
     description: string;
     members: [string];
+    ref: string;
 
     static fromDoc(id: string, data: any): Project {
         const obj = new Project();
-        obj.id = id;
-        Object.assign(obj, data);
+        Object.assign(obj, { id, ...data });
         return obj;
     }
 }
