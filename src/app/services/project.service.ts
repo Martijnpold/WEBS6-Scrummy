@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, of, from, forkJoin, pipe } from 'rxjs';
-import { map, switchMap, flatMap, mergeMap } from 'rxjs/operators';
+import { Observable, of, zip } from 'rxjs';
+import { map, flatMap, zipAll } from 'rxjs/operators';
 import { Project } from '../model/project';
 import { AuthService } from './auth.service';
 import { ScrummyUserService } from './scrummy-user.service';
@@ -52,17 +52,21 @@ export class ProjectService {
   }
 
   public getMembers(project: Project): Observable<ScrummyUser[]> {
-    return this.get(project.id).pipe(
-      map(project => {
-
-      })
-    )
+    console.log('get members for ' + project.name)
+    return this.get(project.id)
+      .pipe(
+        flatMap(project => {
+          return zip(project.members.map(member => {
+            return this.susers.getScrummyUser(member);
+          }));
+        })
+      )
   }
 
-  public getMembers$(project$): Observable<ScrummyUser[]> {
-    return project$.pipe(project => {
+  public getMembers$(project$: Observable<Project>): Observable<ScrummyUser[]> {
+    return project$.pipe(flatMap(project => {
       return this.getMembers(project);
-    })
+    }))
   }
 
   public update(project: Project): Promise<void> {

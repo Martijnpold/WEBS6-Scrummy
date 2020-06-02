@@ -15,6 +15,7 @@ export class ScrummyUserService {
     return this.firestore.collection('users').doc(id)
       .valueChanges()
       .pipe(map((suser: any) => {
+        console.log(suser);
         return ScrummyUser.fromDoc(id, suser);
       }));
   }
