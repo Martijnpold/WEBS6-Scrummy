@@ -10,7 +10,7 @@
 
     <span class="fill-remaining-space"></span>
 
-    <div *ngIf="auth.getUser() | async; then logoutBlock else loginBlock"></div>
+    <div *ngIf="user$ | async; then logoutBlock else loginBlock"></div>
     <ng-template #logoutBlock>
         <button mat-flat-button color="primary" (click)="logout()">
             Logout

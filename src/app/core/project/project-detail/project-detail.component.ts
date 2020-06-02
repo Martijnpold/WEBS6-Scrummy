@@ -14,7 +14,7 @@ export class ProjectDetailComponent implements OnInit {
   project$: Observable<Project>;
   members$: Observable<ScrummyUser[]>;
 
-  constructor(public projectService: ProjectService, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private projectService: ProjectService, @Inject(MAT_DIALOG_DATA) private data: any) {
   }
 
   ngOnInit() {

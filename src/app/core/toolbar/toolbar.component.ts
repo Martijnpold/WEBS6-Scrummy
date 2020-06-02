@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs';
+import { ScrummyUserService } from 'src/app/services/scrummy-user.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,11 +9,13 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
+  user$: Observable<ScrummyUserService>;
 
-  constructor(public auth: AuthService) {
+  constructor(private auth: AuthService) {
   }
 
   ngOnInit(): void {
+    this.user$ = this.auth.getUser();
   }
 
   logout() {

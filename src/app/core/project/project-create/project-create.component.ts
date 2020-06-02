@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/model/project';
-import { User } from 'firebase';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { ScrummyUser } from 'src/app/model/scrummy-user';
 
 @Component({
@@ -19,10 +18,12 @@ export class ProjectCreateComponent implements OnInit {
     'description': new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
   });
   formSubscription: Subscription;
+  user$: Observable<ScrummyUser>;
 
-  constructor(public auth: AuthService, private projectService: ProjectService, private dialogRef: MatDialogRef<ProjectCreateComponent>) { }
+  constructor(private auth: AuthService, private projectService: ProjectService, private dialogRef: MatDialogRef<ProjectCreateComponent>) { }
 
   ngOnInit(): void {
+    this.user$ = this.auth.getUser();
   }
 
   getNameErrorMessage() {

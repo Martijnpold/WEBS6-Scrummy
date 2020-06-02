@@ -10,16 +10,7 @@ import { ScrummyUserService } from './scrummy-user.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private user$: Observable<ScrummyUser>;
-
   constructor(private firestore: AngularFirestore, private susers: ScrummyUserService, private auth: AngularFireAuth) {
-    this.user$ = this.auth.user
-      .pipe(flatMap(user => {
-        if (user) {
-          return this.susers.getScrummyUser(user.uid);
-        }
-        return of(null);
-      }));;
   }
 
   getFireUser() {
@@ -27,7 +18,13 @@ export class AuthService {
   }
 
   getUser() {
-    return this.user$;
+    return this.auth.user
+    .pipe(flatMap(user => {
+      if (user) {
+        return this.susers.getScrummyUser(user.uid);
+      }
+      return of(null);
+    }));
   }
 
   login(email: string, password: string) {
