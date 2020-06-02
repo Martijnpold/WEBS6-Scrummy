@@ -19,12 +19,12 @@ export class AuthService {
 
   getUser() {
     return this.auth.user
-    .pipe(flatMap(user => {
-      if (user) {
-        return this.susers.getScrummyUser(user.uid);
-      }
-      return of(null);
-    }));
+      .pipe(flatMap(user => {
+        if (user) {
+          return this.susers.getScrummyUser(user.uid);
+        }
+        return of(null);
+      }));
   }
 
   login(email: string, password: string) {
