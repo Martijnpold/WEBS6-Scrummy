@@ -1,0 +1,19 @@
+<mat-drawer-container class="drawer-container" autosize>
+    <mat-drawer #drawer class="drawer-sidenav" mode="side">
+        <p>Auto-resizing sidenav</p>
+        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+            Toggle extra text
+        </button>
+    </mat-drawer>
+
+    <div class="sidenav-content">
+        <mat-toolbar class="project-bar">
+            <button mat-flat-button (click)="drawer.toggle()">
+                <mat-icon fontSet="fa" fontIcon="fa-bars"></mat-icon>
+            </button>
+            <h3 class="project-bar-header">{{ headerTitle }}</h3>
+        </mat-toolbar>
+        <ng-content></ng-content>
+    </div>
+</mat-drawer-container>

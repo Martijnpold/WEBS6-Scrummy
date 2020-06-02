@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProjectListComponent } from './core/project/project-list/project-list.component';
-import { LoginComponent } from './core/login/login.component';
-import { RegisterComponent } from './core/register/register.component';
-import { ProjectCreateComponent } from './core/project/project-create/project-create.component';
 import { ProjectsPageComponent } from './page/projects-page/projects-page.component';
 import { RegisterPageComponent } from './page/register-page/register-page.component';
 import { LoginPageComponent } from './page/login-page/login-page.component';
+import { ProjectTasksPageComponent } from './page/project/project-tasks-page/project-tasks-page.component';
 
 
 const routes: Routes = [
@@ -28,8 +25,13 @@ const routes: Routes = [
     component: ProjectsPageComponent
   },
   {
-    path: 'debug',
-    component: ProjectCreateComponent
+    path: 'projects/:id',
+    redirectTo: 'projects/:id/tasks',
+    pathMatch: 'full'
+  },
+  {
+    path: 'projects/:id/tasks',
+    component: ProjectTasksPageComponent
   },
 ];
 
