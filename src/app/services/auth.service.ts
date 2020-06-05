@@ -21,7 +21,7 @@ export class AuthService {
     return this.auth.user
       .pipe(flatMap(user => {
         if (user) {
-          return this.susers.getScrummyUser(user.uid);
+          return this.susers.get(user.uid);
         }
         return of(null);
       }));

@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, of, zip, combineLatest } from 'rxjs';
-import { map, flatMap, zipAll } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, flatMap } from 'rxjs/operators';
 import { Project } from '../model/project';
 import { AuthService } from './auth.service';
-import { ScrummyUserService } from './scrummy-user.service';
-import { ScrummyUser } from '../model/scrummy-user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
 
-  constructor(private firestore: AngularFirestore, private susers: ScrummyUserService, private auth: AuthService) {
+  constructor(private firestore: AngularFirestore, private auth: AuthService) {
   }
 
   public getAll(): Observable<Project[]> {
@@ -49,21 +47,6 @@ export class ProjectService {
           return of(null);
         }
       }));
-  }
-
-  public getMembers(project: Project): Observable<ScrummyUser[]> {
-    return this.get(project.id).pipe(
-      flatMap(project => {
-        return combineLatest(project.members.map(member => {
-          return this.susers.getScrummyUser(member);
-        }));
-      }))
-  }
-
-  public getMembers$(project$: Observable<Project>): Observable<ScrummyUser[]> {
-    return project$.pipe(flatMap(project => {
-      return this.getMembers(project);
-    }))
   }
 
   public update(project: Project): Promise<void> {

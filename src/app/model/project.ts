@@ -3,6 +3,7 @@ export class Project {
     name: string;
     description: string;
     members: [string];
+    tasks: [string];
     ref: string;
 
     static fromDoc(id: string, data: any): Project {

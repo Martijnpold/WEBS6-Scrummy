@@ -4,6 +4,7 @@ import { Project } from 'src/app/model/project';
 import { Observable } from 'rxjs';
 import { ProjectService } from 'src/app/services/project.service';
 import { ScrummyUser } from 'src/app/model/scrummy-user';
+import { ScrummyUserService } from 'src/app/services/scrummy-user.service';
 
 @Component({
   selector: 'app-project-detail',
@@ -14,13 +15,11 @@ export class ProjectDetailComponent implements OnInit {
   project$: Observable<Project>;
   members$: Observable<ScrummyUser[]>;
 
-  constructor(private projectService: ProjectService, @Inject(MAT_DIALOG_DATA) private data: any) {
+  constructor(private projectService: ProjectService, private suserService: ScrummyUserService, @Inject(MAT_DIALOG_DATA) private data: any) {
   }
 
   ngOnInit() {
     this.project$ = this.projectService.get(this.data.project_id);
-    this.project$.subscribe(project => {
-      this.members$ = this.projectService.getMembers(project);
-    })
+    this.members$ = this.suserService.getMembers$(this.project$);
   }
 }

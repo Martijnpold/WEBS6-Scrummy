@@ -1,1 +1,28 @@
-<p>task-create works!</p>
+<div class="dialog-container">
+    <h2 mat-dialog-title>Create Project</h2>
+
+    <form class="login-form" [formGroup]="createForm" class="dialog-field">
+        <mat-form-field appearance="fill" class="dialog-field">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" (keydown.enter)="submitEnter($event)">
+            <mat-error>
+                {{ getNameErrorMessage() }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="dialog-field">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" (keydown.enter)="submitEnter($event)"
+                class="dialog-field"></textarea>
+            <mat-error>
+                {{ getDescriptionErrorMessage() }}
+            </mat-error>
+        </mat-form-field>
+    </form>
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [disabled]="!createForm.valid" *ngIf="user$ | async as user" (click)="create(user)"
+            cdkFocusInitial>Create</button>
+    </mat-dialog-actions>
+</div>
