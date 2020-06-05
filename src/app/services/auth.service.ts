@@ -43,7 +43,6 @@ export class AuthService {
         this.firestore.collection('users').doc(user.user.uid).set({ ...scrummy_user });
         resolve(scrummy_user);
       }).catch(reason => {
-        console.log(reason);
         reject(reason);
       })
     })

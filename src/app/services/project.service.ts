@@ -52,7 +52,6 @@ export class ProjectService {
   }
 
   public getMembers(project: Project): Observable<ScrummyUser[]> {
-    console.log('get members for ' + project.name)
     return this.get(project.id).pipe(
       flatMap(project => {
         return combineLatest(project.members.map(member => {

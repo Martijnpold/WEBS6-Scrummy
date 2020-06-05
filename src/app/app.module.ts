@@ -22,6 +22,8 @@ import { RegisterPageComponent } from './page/register-page/register-page.compon
 import { ProjectDetailComponent } from './core/project/project-detail/project-detail.component';
 import { ProjectMenuComponent } from './core/project-menu/project-menu.component';
 import { ProjectTasksPageComponent } from './page/project/project-tasks-page/project-tasks-page.component';
+import { TaskCreateComponent } from './core/task/task-create/task-create.component';
+import { TaskListComponent } from './core/task/task-list/task-list.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { ProjectTasksPageComponent } from './page/project/project-tasks-page/pro
     ProjectDetailComponent,
     ProjectMenuComponent,
     ProjectTasksPageComponent,
+    TaskCreateComponent,
+    TaskListComponent,
   ],
   imports: [
     BrowserModule,

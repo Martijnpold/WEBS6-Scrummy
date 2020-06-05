@@ -23,8 +23,4 @@ export class ProjectDetailComponent implements OnInit {
       this.members$ = this.projectService.getMembers(project);
     })
   }
-
-  open(project: Project) {
-    console.log(`opened ${project}`)
-  }
 }

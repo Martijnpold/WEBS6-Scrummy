@@ -2,10 +2,10 @@
     <h1 mat-dialog-title class="no-margin">{{ project.name }}</h1>
     <h3>{{ project.description }}</h3>
 
-    <span *ngIf="(members$ | async).length > 0">
+    <span *ngIf="members$ | async as members">
         <h3 class="no-margin">Members</h3>
         <ul class="no-margin">
-            <li *ngFor="let member of members$">{{ member.displayName }}</li>
+            <li *ngFor="let member of members">{{ member.displayName }}</li>
         </ul>
     </span>
 </div>
