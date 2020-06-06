@@ -22,14 +22,16 @@ export class TaskListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   displayedColumns = [
-    { name: 'ID', id: 'id' },
+    { id: 'index' },
     { name: 'Name', id: 'name' },
+    { name: 'Description', id: 'description' },
+    { id: 'controls' },
   ];
 
   constructor(private taskService: TaskService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource<Project>();
+    this.dataSource = new MatTableDataSource<Task>();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
@@ -46,7 +48,6 @@ export class TaskListComponent implements OnInit {
     var dp = this.displayedColumns.map(a => {
       return a.id
     });
-    dp.push('controls');
     return dp;
   }
 }

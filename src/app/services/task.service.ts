@@ -22,9 +22,13 @@ export class TaskService {
 
   public getTasks$(project$: Observable<Project>): Observable<Task[]> {
     return project$.pipe(flatMap(project => {
-      return combineLatest(project.tasks.map(member => {
-        return this.get(member);
-      }));
+      if (project && project.tasks) {
+        return combineLatest(project.tasks.map(member => {
+          return this.get(member);
+        }));
+      } else {
+        return [];
+      }
     }))
   }
 

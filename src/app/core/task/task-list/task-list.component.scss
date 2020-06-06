@@ -10,8 +10,12 @@
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 10% !important;
-    width: 60px !important;
+    width: 130px !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
+}
+
+.button-spacer {
+    margin-right: 3px;
 }

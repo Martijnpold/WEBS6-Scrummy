@@ -1,5 +1,5 @@
 <div class="dialog-container">
-    <h2 mat-dialog-title>Create Project</h2>
+    <h2 mat-dialog-title>Create Task</h2>
 
     <form class="login-form" [formGroup]="createForm" class="dialog-field">
         <mat-form-field appearance="fill" class="dialog-field">
@@ -22,7 +22,9 @@
 
     <mat-dialog-actions align="end">
         <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button [disabled]="!createForm.valid" *ngIf="user$ | async as user" (click)="create(user)"
-            cdkFocusInitial>Create</button>
+        <span *ngIf="user$ | async as user">
+            <button mat-button [disabled]="!createForm.valid" *ngIf="project$ | async as project"
+                (click)="create(user, project)" cdkFocusInitial>Create</button>
+        </span>
     </mat-dialog-actions>
 </div>

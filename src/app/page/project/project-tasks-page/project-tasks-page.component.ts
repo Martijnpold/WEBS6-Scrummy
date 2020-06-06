@@ -30,6 +30,6 @@ export class ProjectTasksPageComponent implements OnInit {
   }
 
   openCreateDialog() {
-    this.dialog.open(TaskCreateComponent);
+    this.dialog.open(TaskCreateComponent, { data: { 'project': this.project$ } });
   }
 }

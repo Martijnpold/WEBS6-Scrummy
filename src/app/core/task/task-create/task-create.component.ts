@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { ScrummyUser } from 'src/app/model/scrummy-user';
 import { AuthService } from 'src/app/services/auth.service';
-import { ProjectService } from 'src/app/services/project.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProjectCreateComponent } from '../../project/project-create/project-create.component';
 import { Project } from 'src/app/model/project';
+import { TaskService } from 'src/app/services/task.service';
+import { Task } from 'src/app/model/task';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-task-create',
@@ -14,6 +17,7 @@ import { Project } from 'src/app/model/project';
   styleUrls: ['./task-create.component.scss']
 })
 export class TaskCreateComponent implements OnInit {
+  @Input() project$: Observable<Project>;
   createForm = new FormGroup({
     'name': new FormControl('', [Validators.required]),
     'description': new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
@@ -21,10 +25,11 @@ export class TaskCreateComponent implements OnInit {
   formSubscription: Subscription;
   user$: Observable<ScrummyUser>;
 
-  constructor(private auth: AuthService, private projectService: ProjectService, private dialogRef: MatDialogRef<ProjectCreateComponent>) { }
+  constructor(private auth: AuthService, private projectService: ProjectService, private taskService: TaskService, private dialogRef: MatDialogRef<ProjectCreateComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.user$ = this.auth.getUser();
+    this.project$ = this.data.project;
   }
 
   getNameErrorMessage() {
@@ -45,13 +50,16 @@ export class TaskCreateComponent implements OnInit {
     $event.stopPropagation();
   }
 
-  create(user: ScrummyUser) {
+  create(user: ScrummyUser, project: Project) {
     if (this.createForm.valid) {
-      const project = new Project();
-      project.name = this.createForm.get('name').value;
-      project.description = this.createForm.get('description').value;
-      project.members = [user.id]
-      this.projectService.create(project);
+      const task = new Task();
+      task.name = this.createForm.get('name').value;
+      task.description = this.createForm.get('description').value;
+      task.project = project.id;
+      this.taskService.create(task).then(data => {
+        project.tasks.push(data.id);
+        this.projectService.update(project);
+      });
       this.dialogRef.close();
     }
   }
