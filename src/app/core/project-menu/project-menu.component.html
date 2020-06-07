@@ -1,10 +1,16 @@
 <mat-drawer-container class="drawer-container" autosize>
     <mat-drawer #drawer class="drawer-sidenav" mode="side">
-        <p>Auto-resizing sidenav</p>
-        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-        <button (click)="showFiller = !showFiller" mat-raised-button>
-            Toggle extra text
-        </button>
+        <span *ngIf="project$ | async as project">
+            <h3>Project</h3>
+            <button mat-button [routerLink]="'/projects/' + project.id + '/tasks'">Project Backlog</button><br>
+            <button mat-button [routerLink]="'/projects/' + project.id + '/members'">Project Members</button><br>
+            <button mat-button [routerLink]="'/projects/' + project.id + '/settings'">Project Settings</button><br>
+            <h3>Sprints</h3>
+            <button mat-button>All Sprints</button><br>
+            <button mat-button>Sprint 1</button><br>
+            <button mat-button>Sprint 2</button><br>
+            <button mat-button>> Sprint 3</button><br>
+        </span>
     </mat-drawer>
 
     <div class="sidenav-content">

@@ -24,6 +24,8 @@ import { ProjectMenuComponent } from './core/project-menu/project-menu.component
 import { ProjectTasksPageComponent } from './page/project/project-tasks-page/project-tasks-page.component';
 import { TaskCreateComponent } from './core/task/task-create/task-create.component';
 import { TaskListComponent } from './core/task/task-list/task-list.component';
+import { ProjectMembersPageComponent } from './page/project/project-members-page/project-members-page.component';
+import { ProjectSettingsPageComponent } from './page/project/project-settings-page/project-settings-page.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { TaskListComponent } from './core/task/task-list/task-list.component';
     ProjectTasksPageComponent,
     TaskCreateComponent,
     TaskListComponent,
+    ProjectMembersPageComponent,
+    ProjectSettingsPageComponent,
   ],
   imports: [
     BrowserModule,

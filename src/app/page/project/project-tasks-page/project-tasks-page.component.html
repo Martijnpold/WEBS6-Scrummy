@@ -1,4 +1,4 @@
-<app-project-menu *ngIf="project$ | async as project" [headerTitle]="project.name + ' Tasks'">
+<app-project-menu *ngIf="project$ | async as project" [headerTitle]="project.name + ' Backlog'" [project$]="project$">
     <app-task-list [tasks$]="tasks$"></app-task-list>
     <div class="small-spacer" *ngIf="user$ | async">
         <button mat-raised-button color="accent" (click)="openCreateDialog()">

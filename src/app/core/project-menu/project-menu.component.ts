@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Project } from 'src/app/model/project';
 
 @Component({
   selector: 'app-project-menu',
@@ -8,11 +10,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProjectMenuComponent implements OnInit {
   @Input() opened: boolean
   @Input() headerTitle: string;
-  showFiller = false;
+  @Input() project$: Observable<Project>;
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

@@ -19,7 +19,6 @@ export class ProjectTasksPageComponent implements OnInit {
   user$: Observable<ScrummyUser>;
   project$: Observable<Project>;
   tasks$: Observable<Task[]>;
-  showFiller = false;
 
   constructor(private projectService: ProjectService, private taskService: TaskService, private route: ActivatedRoute, private dialog: MatDialog, private auth: AuthService) { }
 

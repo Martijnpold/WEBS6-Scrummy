@@ -4,6 +4,8 @@ import { ProjectsPageComponent } from './page/projects-page/projects-page.compon
 import { RegisterPageComponent } from './page/register-page/register-page.component';
 import { LoginPageComponent } from './page/login-page/login-page.component';
 import { ProjectTasksPageComponent } from './page/project/project-tasks-page/project-tasks-page.component';
+import { ProjectMembersPageComponent } from './page/project/project-members-page/project-members-page.component';
+import { ProjectSettingsPageComponent } from './page/project/project-settings-page/project-settings-page.component';
 
 
 const routes: Routes = [
@@ -32,6 +34,14 @@ const routes: Routes = [
   {
     path: 'projects/:id/tasks',
     component: ProjectTasksPageComponent
+  },
+  {
+    path: 'projects/:id/members',
+    component: ProjectMembersPageComponent
+  },
+  {
+    path: 'projects/:id/settings',
+    component: ProjectSettingsPageComponent
   },
 ];
 
