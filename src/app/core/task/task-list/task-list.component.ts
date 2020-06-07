@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Project } from 'src/app/model/project';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ProjectService } from 'src/app/services/project.service';
 import { Task } from 'src/app/model/task';
 import { ActivatedRoute } from '@angular/router';
 import { TaskService } from 'src/app/services/task.service';
@@ -24,7 +22,6 @@ export class TaskListComponent implements OnInit {
   displayedColumns = [
     { id: 'index' },
     { name: 'Name', id: 'name' },
-    { name: 'Description', id: 'description' },
     { id: 'controls' },
   ];
 
@@ -49,5 +46,20 @@ export class TaskListComponent implements OnInit {
       return a.id
     });
     return dp;
+  }
+
+  details(task: Task) {
+    console.log('details ' + Math.random())
+    console.log(task);
+  }
+
+  plan(task: Task) {
+    console.log('plan ' + Math.random())
+    console.log(task);
+  }
+
+  archive(task: Task) {
+    console.log('archive ' + Math.random())
+    console.log(task);
   }
 }
