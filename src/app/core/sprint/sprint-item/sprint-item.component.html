@@ -1,1 +1,4 @@
-<p>sprint-item works!</p>
+<mat-card class="small-spacer" (click)="openDetailDialog()">
+    <mat-card-title><mat-icon fontSet="fa" fontIcon="fa-running"></mat-icon> {{ sprint.name }}</mat-card-title>
+    <mat-card-subtitle>{{sprint.startDate.toDate() | date}} to {{sprint.endDate.toDate() | date}}</mat-card-subtitle>
+</mat-card>

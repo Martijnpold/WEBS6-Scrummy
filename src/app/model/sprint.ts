@@ -1,6 +1,8 @@
 export class Sprint {
     id: string;
     name: string;
+    startDate: Date;
+    endDate: Date;
 
     constructor() {
     }

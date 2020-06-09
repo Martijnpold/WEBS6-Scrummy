@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { SprintService } from 'src/app/services/sprint.service';
 import { Sprint } from 'src/app/model/sprint';
+import { MatDialog } from '@angular/material/dialog';
+import { SprintCreateComponent } from 'src/app/core/sprint/sprint-create/sprint-create.component';
 
 @Component({
   selector: 'app-project-sprints-page',
@@ -16,17 +18,17 @@ import { Sprint } from 'src/app/model/sprint';
 export class ProjectSprintsPageComponent implements OnInit {
   user$: Observable<ScrummyUser>;
   project$: Observable<Project>;
+  sprints$: Observable<Sprint[]>;
 
-  constructor(private projectService: ProjectService, private sprintService: SprintService, private route: ActivatedRoute, private auth: AuthService) { }
+  constructor(private projectService: ProjectService, private sprintService: SprintService, private route: ActivatedRoute, private auth: AuthService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.user$ = this.auth.getUser();
     this.project$ = this.projectService.get(this.route.snapshot.paramMap.get('pid'));
+    this.sprints$ = this.sprintService.getSprints$(this.project$);
   }
 
-  create(project: Project) {
-    let sprint = new Sprint();
-    sprint.name = 'Test Sprint';
-    this.sprintService.create(project, sprint);
+  openCreateDialog() {
+    this.dialog.open(SprintCreateComponent, { data: { 'project': this.project$ } });
   }
 }

@@ -1,1 +1,8 @@
-<p>sprint-list works!</p>
+<div *ngFor="let sprint of sprints$ | async">
+    <app-sprint-item [sprint]="sprint"></app-sprint-item>
+</div>
+
+<mat-card *ngIf="(sprints$ | async)?.length == 0" class="small-spacer">
+    <mat-card-title>No sprints here yet</mat-card-title>
+    <mat-card-subtitle>Click the button below to create one!</mat-card-subtitle>
+</mat-card>

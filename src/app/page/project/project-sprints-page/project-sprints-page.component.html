@@ -1,4 +1,9 @@
 <app-project-menu *ngIf="project$ | async as project" [headerTitle]="project.name + ' Sprints'" [project$]="project$">
-    <p>project-sprints-page works!</p>
-    <button (click)="create(project)">Create</button>
+    <app-sprint-list [sprints$]="sprints$"></app-sprint-list>
+
+    <div class="small-spacer" *ngIf="user$ | async">
+        <button mat-raised-button color="accent" (click)="openCreateDialog()">
+            <mat-icon fontSet="fa" fontIcon="fa-plus" class="button-icon"></mat-icon>
+        </button>
+    </div>
 </app-project-menu>

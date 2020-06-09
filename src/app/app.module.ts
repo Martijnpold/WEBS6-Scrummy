@@ -29,6 +29,7 @@ import { ProjectSettingsPageComponent } from './page/project/project-settings-pa
 import { SprintListComponent } from './core/sprint/sprint-list/sprint-list.component';
 import { SprintItemComponent } from './core/sprint/sprint-item/sprint-item.component';
 import { ProjectSprintsPageComponent } from './page/project/project-sprints-page/project-sprints-page.component';
+import { SprintCreateComponent } from './core/sprint/sprint-create/sprint-create.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ProjectSprintsPageComponent } from './page/project/project-sprints-page
     SprintListComponent,
     SprintItemComponent,
     ProjectSprintsPageComponent,
+    SprintCreateComponent,
   ],
   imports: [
     BrowserModule,

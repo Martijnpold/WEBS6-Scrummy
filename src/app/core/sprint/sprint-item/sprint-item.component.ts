@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Sprint } from 'src/app/model/sprint';
 
 @Component({
   selector: 'app-sprint-item',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sprint-item.component.scss']
 })
 export class SprintItemComponent implements OnInit {
+  @Input() sprint: Sprint;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  openDetailDialog() {
+
+  }
 }
