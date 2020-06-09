@@ -2,7 +2,11 @@ export class Task {
     id: string;
     name: string;
     description: string;
-    project: string;
+    archived: boolean;
+
+    constructor() {
+        this.archived = false;
+    }
 
     static fromDoc(id: string, data: any): Task {
         const obj = new Task();

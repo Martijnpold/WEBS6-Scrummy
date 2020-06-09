@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { map, flatMap, filter } from 'rxjs/operators';
 import { Project } from '../model/project';
 import { AuthService } from './auth.service';
 
@@ -13,7 +13,7 @@ export class ProjectService {
   constructor(private firestore: AngularFirestore, private auth: AuthService) {
   }
 
-  public getAll(): Observable<Project[]> {
+  public getAll(archived: boolean = false): Observable<Project[]> {
     return this.auth.getUser()
       .pipe(flatMap((user) => {
         if (user) {
@@ -26,14 +26,15 @@ export class ProjectService {
                   const obj = Project.fromDoc(doc.id, doc.data());
                   return (obj.members.includes(user.id)) ? obj : null;
                 })
-                .filter(x => x != null);
+                .filter(x => x != null)
+                .filter(x => x.archived == archived);
             }));
         }
         return of([]);
       }));
   }
 
-  public get(id: string): Observable<Project> {
+  public get(id: string, archived: boolean = false): Observable<Project> {
     return this.auth.getUser()
       .pipe(flatMap((user) => {
         if (user) {
@@ -42,7 +43,9 @@ export class ProjectService {
             .pipe(map((project: any) => {
               const obj = Project.fromDoc(id, project);
               return (obj.members.includes(user.id)) ? obj : null;
-            }));
+            }))
+            .pipe(filter(x => x != null))
+            .pipe(filter(x => x.archived == archived));
         } else {
           return of(null);
         }

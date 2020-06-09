@@ -1,0 +1,4 @@
+<app-project-menu *ngIf="project$ | async as project" [headerTitle]="project.name + ' Sprints'" [project$]="project$">
+    <p>project-sprints-page works!</p>
+    <button (click)="create(project)">Create</button>
+</app-project-menu>

@@ -22,6 +22,6 @@ export class ProjectMembersPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.user$ = this.auth.getUser();
-    this.project$ = this.projectService.get(this.route.snapshot.paramMap.get('id'));
+    this.project$ = this.projectService.get(this.route.snapshot.paramMap.get('pid'));
   }
 }

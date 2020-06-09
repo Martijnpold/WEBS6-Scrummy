@@ -6,10 +6,10 @@
             <button mat-button [routerLink]="'/projects/' + project.id + '/members'">Project Members</button><br>
             <button mat-button [routerLink]="'/projects/' + project.id + '/settings'">Project Settings</button><br>
             <h3>Sprints</h3>
-            <button mat-button>All Sprints</button><br>
-            <button mat-button>Sprint 1</button><br>
-            <button mat-button>Sprint 2</button><br>
-            <button mat-button>> Sprint 3</button><br>
+            <button mat-button [routerLink]="'/projects/' + project.id + '/sprints'">All Sprints</button><br>
+            <span *ngFor="let sprint of sprints$ | async">
+                <button mat-button>{{sprint.name}}</button><br>
+            </span>
         </span>
     </mat-drawer>
 

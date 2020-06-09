@@ -26,6 +26,9 @@ import { TaskCreateComponent } from './core/task/task-create/task-create.compone
 import { TaskListComponent } from './core/task/task-list/task-list.component';
 import { ProjectMembersPageComponent } from './page/project/project-members-page/project-members-page.component';
 import { ProjectSettingsPageComponent } from './page/project/project-settings-page/project-settings-page.component';
+import { SprintListComponent } from './core/sprint/sprint-list/sprint-list.component';
+import { SprintItemComponent } from './core/sprint/sprint-item/sprint-item.component';
+import { ProjectSprintsPageComponent } from './page/project/project-sprints-page/project-sprints-page.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { ProjectSettingsPageComponent } from './page/project/project-settings-pa
     TaskListComponent,
     ProjectMembersPageComponent,
     ProjectSettingsPageComponent,
+    SprintListComponent,
+    SprintItemComponent,
+    ProjectSprintsPageComponent,
   ],
   imports: [
     BrowserModule,

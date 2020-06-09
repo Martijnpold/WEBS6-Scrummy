@@ -6,6 +6,7 @@ import { LoginPageComponent } from './page/login-page/login-page.component';
 import { ProjectTasksPageComponent } from './page/project/project-tasks-page/project-tasks-page.component';
 import { ProjectMembersPageComponent } from './page/project/project-members-page/project-members-page.component';
 import { ProjectSettingsPageComponent } from './page/project/project-settings-page/project-settings-page.component';
+import { ProjectSprintsPageComponent } from './page/project/project-sprints-page/project-sprints-page.component';
 
 
 const routes: Routes = [
@@ -27,21 +28,25 @@ const routes: Routes = [
     component: ProjectsPageComponent
   },
   {
-    path: 'projects/:id',
-    redirectTo: 'projects/:id/tasks',
+    path: 'projects/:pid',
+    redirectTo: 'projects/:pid/tasks',
     pathMatch: 'full'
   },
   {
-    path: 'projects/:id/tasks',
+    path: 'projects/:pid/tasks',
     component: ProjectTasksPageComponent
   },
   {
-    path: 'projects/:id/members',
+    path: 'projects/:pid/members',
     component: ProjectMembersPageComponent
   },
   {
-    path: 'projects/:id/settings',
+    path: 'projects/:pid/settings',
     component: ProjectSettingsPageComponent
+  },
+  {
+    path: 'projects/:pid/sprints',
+    component: ProjectSprintsPageComponent
   },
 ];
 

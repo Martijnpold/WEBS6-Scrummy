@@ -3,12 +3,11 @@ export class Project {
     name: string;
     description: string;
     members: string[];
-    tasks: string[];
-    ref: string;
+    archived: boolean;
 
     constructor() {
-        this.tasks = [];
         this.members = [];
+        this.archived = false;
     }
 
     static fromDoc(id: string, data: any): Project {
