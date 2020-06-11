@@ -1,5 +1,5 @@
 <app-project-menu *ngIf="project$ | async as project" [headerTitle]="project.name + ' Backlog'" [project$]="project$">
-    <app-task-list [tasks$]="tasks$"></app-task-list>
+    <app-task-list [project$]="project$" [active_sprint$]="active_sprint$" [tasks$]="tasks$"></app-task-list>
     <div class="small-spacer" *ngIf="user$ | async">
         <button mat-raised-button color="accent" (click)="openCreateDialog()">
             Create Task

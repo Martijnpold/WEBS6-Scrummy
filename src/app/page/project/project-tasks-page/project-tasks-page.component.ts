@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { Project } from 'src/app/model/project';
 import { ProjectService } from 'src/app/services/project.service';
 import { ActivatedRoute } from '@angular/router';
@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Task } from 'src/app/model/task';
 import { TaskService } from 'src/app/services/task.service';
 import { TaskCreateComponent } from 'src/app/core/task/task-create/task-create.component';
+import { Sprint } from 'src/app/model/sprint';
+import { SprintService } from 'src/app/services/sprint.service';
 
 @Component({
   selector: 'app-project-tasks-page',
@@ -18,13 +20,15 @@ import { TaskCreateComponent } from 'src/app/core/task/task-create/task-create.c
 export class ProjectTasksPageComponent implements OnInit {
   user$: Observable<ScrummyUser>;
   project$: Observable<Project>;
+  active_sprint$: Observable<Sprint>;
   tasks$: Observable<Task[]>;
 
-  constructor(private projectService: ProjectService, private taskService: TaskService, private route: ActivatedRoute, private dialog: MatDialog, private auth: AuthService) { }
+  constructor(private projectService: ProjectService, private sprintService: SprintService, private taskService: TaskService, private route: ActivatedRoute, private dialog: MatDialog, private auth: AuthService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.user$ = this.auth.getUser();
     this.project$ = this.projectService.get(this.route.snapshot.paramMap.get('pid'));
+    this.active_sprint$ = this.sprintService.getActiveSprint$(this.project$);
     this.tasks$ = this.taskService.getTasks$(this.project$);
   }
 

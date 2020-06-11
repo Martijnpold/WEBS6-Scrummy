@@ -1,4 +1,4 @@
-<div class="mat-elevation-z8 project-table-container small-spacer">
+<div *ngIf="project$ | async as project" class="mat-elevation-z8 project-table-container small-spacer">
     <table mat-table [dataSource]="dataSource" matSort class="project-table">
 
         <ng-container matColumnDef="index">
@@ -19,9 +19,13 @@
                 <button mat-mini-fab color="primary" class="button-spacer" matTooltip="Details" (click)="details(row)">
                     <mat-icon class="button-icon" fontSet="fa" fontIcon="fa-id-card"></mat-icon>
                 </button>
-                <button mat-mini-fab color="primary" class="button-spacer" matTooltip="Add to active sprint" (click)="plan(row)">
-                    <mat-icon class="button-icon" fontSet="fa" fontIcon="fa-calendar-day"></mat-icon>
-                </button>
+                <span *ngIf="active_sprint$ | async as active_sprint">
+                    <button mat-mini-fab color="primary" class="button-spacer"
+                        matTooltip="Add to sprint '{{active_sprint.name}}'" [disabled]="row.sprint"
+                        (click)="plan(project, active_sprint, row)">
+                        <mat-icon class="button-icon" fontSet="fa" fontIcon="fa-calendar-day"></mat-icon>
+                    </button>
+                </span>
                 <button mat-mini-fab color="primary" class="button-spacer" matTooltip="Archive" (click)="archive(row)">
                     <mat-icon class="button-icon" fontSet="fa" fontIcon="fa-archive"></mat-icon>
                 </button>

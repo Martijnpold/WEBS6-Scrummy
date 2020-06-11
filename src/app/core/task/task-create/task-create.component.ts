@@ -55,7 +55,8 @@ export class TaskCreateComponent implements OnInit {
       const task = new Task();
       task.name = this.createForm.get('name').value;
       task.description = this.createForm.get('description').value;
-      this.taskService.create(project, task);
+      task.creator = user.id;
+      this.taskService.createTask(project, task);
       this.dialogRef.close();
     }
   }

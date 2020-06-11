@@ -4,8 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Task } from 'src/app/model/task';
-import { ActivatedRoute } from '@angular/router';
+import { Sprint } from 'src/app/model/sprint';
+import { Project } from 'src/app/model/project';
 import { TaskService } from 'src/app/services/task.service';
+import { TaskStatus } from 'src/app/model/task-status.enum';
 
 @Component({
   selector: 'app-task-list',
@@ -13,7 +15,9 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
+  @Input() project$: Observable<Project>;
   @Input() tasks$: Observable<Task[]>;
+  @Input() active_sprint$: Observable<Sprint>;
   subscription: Subscription;
 
   dataSource: MatTableDataSource<Task>;
@@ -22,10 +26,11 @@ export class TaskListComponent implements OnInit {
   displayedColumns = [
     { id: 'index' },
     { name: 'Name', id: 'name' },
+    { name: 'Status', id: 'status' },
     { id: 'controls' },
   ];
 
-  constructor() { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<Task>();
@@ -53,9 +58,10 @@ export class TaskListComponent implements OnInit {
     console.log(task);
   }
 
-  plan(task: Task) {
-    console.log('plan ' + Math.random())
-    console.log(task);
+  plan(project: Project, sprint: Sprint, task: Task) {
+    task.sprint = sprint.id;
+    task.status = TaskStatus.Planned;
+    this.taskService.updateTask(project, task);
   }
 
   archive(task: Task) {

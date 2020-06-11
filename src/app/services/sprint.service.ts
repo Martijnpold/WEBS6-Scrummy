@@ -12,6 +12,15 @@ export class SprintService {
 
   constructor(private firestore: AngularFirestore) { }
 
+  getActiveSprint$(project$: Observable<Project>): Observable<Sprint> {
+    return this.getSprints$(project$).pipe(map(arr => {
+      for (let spr of arr) {
+        if (spr.active) return spr;
+      }
+      return null;
+    }));
+  }
+
   getSprints$(project$: Observable<Project>): Observable<Sprint[]> {
     return project$.pipe(flatMap(project => {
       return this.firestore.collection('projects').doc(project.id).collection('sprints')
