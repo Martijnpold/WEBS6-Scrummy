@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { map, flatMap, tap } from 'rxjs/operators';
 import { Project } from '../model/project';
 import { Task } from '../model/task';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -28,6 +28,9 @@ export class TaskService {
             .filter(x => x.archived == archived)
             .filter(x => (!for_sprint && (!x.sprint || x.status != TaskStatus.Done)) || (for_sprint && for_sprint.id == x.sprint));
         }))
+        .pipe(tap(x => x.sort((a, b) => {
+          return b.createdOn.seconds - a.createdOn.seconds;
+        })));
     }));
   }
 

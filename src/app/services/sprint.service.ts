@@ -31,12 +31,7 @@ export class SprintService {
           return obj;
         })))
         .pipe(tap(x => x.sort((a, b) => {
-          let aS = a.startDate.seconds;
-          let bS = b.startDate.seconds;
-          if (aS != bS) {
-            return aS > bS ? -1 : 1;
-          }
-          return 0;
+          return b.startDate.seconds - a.startDate.seconds;
         })));
     }));
   }
