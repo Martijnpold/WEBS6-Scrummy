@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { ProjectService } from 'src/app/services/project.service';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Project } from '../../../model/project';
 import { AuthService } from 'src/app/services/auth.service';
 import { ScrummyUser } from 'src/app/model/scrummy-user';
@@ -11,13 +10,12 @@ import { ScrummyUser } from 'src/app/model/scrummy-user';
   styleUrls: ['./project-list.component.scss']
 })
 export class ProjectListComponent implements OnInit {
-  projects$: Observable<Project[]>;
+  @Input() projects$: Observable<Project[]>;
   user$: Observable<ScrummyUser>;
 
-  constructor(private projectService: ProjectService, private auth: AuthService) { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    this.projects$ = this.projectService.getAll();
     this.user$ = this.auth.getUser();
   }
 }

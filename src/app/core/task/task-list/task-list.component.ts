@@ -25,7 +25,7 @@ export class TaskListComponent implements OnInit {
     { id: 'controls' },
   ];
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<Task>();

@@ -1,5 +1,5 @@
-<div *ngFor="let sprint of sprints$ | async">
-    <app-sprint-item [sprint]="sprint"></app-sprint-item>
+<div *ngIf="project$ | async as project">
+    <app-sprint-item *ngFor="let sprint of sprints$ | async" [project]="project" [sprint]="sprint"></app-sprint-item>
 </div>
 
 <mat-card *ngIf="(sprints$ | async)?.length == 0" class="small-spacer">

@@ -13,7 +13,7 @@ export class ProjectService {
   constructor(private firestore: AngularFirestore, private auth: AuthService) {
   }
 
-  public getAll(archived: boolean = false): Observable<Project[]> {
+  getAll(archived: boolean = false): Observable<Project[]> {
     return this.auth.getUser()
       .pipe(flatMap((user) => {
         if (user) {
@@ -34,7 +34,7 @@ export class ProjectService {
       }));
   }
 
-  public get(id: string, archived: boolean = false): Observable<Project> {
+  get(id: string, archived: boolean = false): Observable<Project> {
     return this.auth.getUser()
       .pipe(flatMap((user) => {
         if (user) {
@@ -52,17 +52,17 @@ export class ProjectService {
       }));
   }
 
-  public update(project: Project): Promise<void> {
+  update(project: Project): Promise<void> {
     const { id, ...obj } = project;
     return this.firestore.collection('projects').doc(id).update(obj);
   }
 
-  public create(project: Project): Promise<any> {
+  create(project: Project): Promise<any> {
     const { id, ...obj } = project;
     return this.firestore.collection('projects').add(obj);
   }
 
-  public delete(project: Project): Promise<void> {
+  delete(project: Project): Promise<void> {
     return this.firestore.collection('projects').doc(project.id).delete();
   }
 }

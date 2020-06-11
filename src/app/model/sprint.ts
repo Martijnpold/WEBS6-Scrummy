@@ -1,8 +1,11 @@
+import { firestore } from 'firebase';
+
 export class Sprint {
     id: string;
     name: string;
-    startDate: Date;
-    endDate: Date;
+    startDate: firestore.Timestamp;
+    endDate: firestore.Timestamp;
+    active: boolean;
 
     constructor() {
     }

@@ -1,4 +1,4 @@
-<app-project-list></app-project-list>
+<app-project-list [projects$]="projects$"></app-project-list>
 <div class="small-spacer" *ngIf="user$ | async">
     <button mat-raised-button color="accent" (click)="openCreateDialog()">
         <mat-icon fontSet="fa" fontIcon="fa-plus" class="button-icon"></mat-icon>

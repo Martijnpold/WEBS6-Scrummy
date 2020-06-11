@@ -1,5 +1,5 @@
 <app-project-menu *ngIf="project$ | async as project" [headerTitle]="project.name + ' Sprints'" [project$]="project$">
-    <app-sprint-list [sprints$]="sprints$"></app-sprint-list>
+    <app-sprint-list [project$]="project$" [sprints$]="sprints$"></app-sprint-list>
 
     <div class="small-spacer" *ngIf="user$ | async">
         <button mat-raised-button color="accent" (click)="openCreateDialog()">

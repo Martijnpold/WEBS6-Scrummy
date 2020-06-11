@@ -21,7 +21,7 @@ export class ScrummyUserService {
       }));
   }
 
-  public getMembers$(project$: Observable<Project>): Observable<ScrummyUser[]> {
+  getMembers$(project$: Observable<Project>): Observable<ScrummyUser[]> {
     return project$.pipe(flatMap(project => {
       return combineLatest(project.members.map(member => {
         return this.get(member);

@@ -25,7 +25,7 @@ export class SprintCreateComponent implements OnInit {
   formSubscription: Subscription;
   user$: Observable<ScrummyUser>;
 
-  constructor(private auth: AuthService, private projectService: ProjectService, private sprintService: SprintService, private dialogRef: MatDialogRef<ProjectCreateComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private auth: AuthService, private sprintService: SprintService, private dialogRef: MatDialogRef<ProjectCreateComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.user$ = this.auth.getUser();
