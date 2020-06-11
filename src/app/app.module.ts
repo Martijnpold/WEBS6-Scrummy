@@ -20,7 +20,7 @@ import { ProjectsPageComponent } from './page/projects-page/projects-page.compon
 import { LoginPageComponent } from './page/login-page/login-page.component';
 import { RegisterPageComponent } from './page/register-page/register-page.component';
 import { ProjectDetailComponent } from './core/project/project-detail/project-detail.component';
-import { ProjectMenuComponent } from './core/project-menu/project-menu.component';
+import { ProjectMenuComponent } from './core/project/project-menu/project-menu.component';
 import { ProjectTasksPageComponent } from './page/project/project-tasks-page/project-tasks-page.component';
 import { TaskCreateComponent } from './core/task/task-create/task-create.component';
 import { TaskListComponent } from './core/task/task-list/task-list.component';

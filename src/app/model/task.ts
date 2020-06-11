@@ -5,14 +5,15 @@ export class Task {
     id: string;
     name: string;
     description: string;
+    story_points: number;
     creator: string;
     sprint: string;
     status: TaskStatus;
     archived: boolean;
     createdOn: firestore.Timestamp;
 
-
     constructor() {
+        this.story_points = 1;
         this.archived = false;
         this.status = TaskStatus.Todo;
         this.createdOn = firestore.Timestamp.now();

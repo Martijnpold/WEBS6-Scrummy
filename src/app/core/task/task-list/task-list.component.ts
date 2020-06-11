@@ -26,6 +26,7 @@ export class TaskListComponent implements OnInit {
   displayedColumns = [
     { id: 'index' },
     { name: 'Name', id: 'name' },
+    { name: 'Story Points', id: 'story_points' },
     { name: 'Status', id: 'status' },
     { id: 'controls' },
   ];
@@ -64,8 +65,8 @@ export class TaskListComponent implements OnInit {
     this.taskService.updateTask(project, task);
   }
 
-  archive(task: Task) {
-    console.log('archive ' + Math.random())
-    console.log(task);
+  archive(project: Project, task: Task) {
+    task.archived = true;
+    this.taskService.updateTask(project, task);
   }
 }

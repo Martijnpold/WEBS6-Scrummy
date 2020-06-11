@@ -21,6 +21,7 @@ export class TaskCreateComponent implements OnInit {
   createForm = new FormGroup({
     'name': new FormControl('', [Validators.required]),
     'description': new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
+    'story_points': new FormControl('', [Validators.required]),
   });
   formSubscription: Subscription;
   user$: Observable<ScrummyUser>;
@@ -46,6 +47,12 @@ export class TaskCreateComponent implements OnInit {
     return '';
   }
 
+  getStoryPointsErrorMessage() {
+    const storyPoints = this.createForm.get('story_points');
+    if (storyPoints.hasError('required')) return 'You must enter a value';
+    return '';
+  }
+
   submitEnter($event: KeyboardEvent) {
     $event.stopPropagation();
   }
@@ -55,6 +62,7 @@ export class TaskCreateComponent implements OnInit {
       const task = new Task();
       task.name = this.createForm.get('name').value;
       task.description = this.createForm.get('description').value;
+      task.story_points = this.createForm.get('story_points').value;
       task.creator = user.id;
       this.taskService.createTask(project, task);
       this.dialogRef.close();
