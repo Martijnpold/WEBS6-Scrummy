@@ -4,9 +4,12 @@
         <div cdkDropList #PlannedList="cdkDropList" [cdkDropListData]="tasks.get('Planned')" class="task-list"
             [cdkDropListConnectedTo]="[InProgressList, DoneList]"
             (cdkDropListDropped)="drop($event, project, 'Planned')">
-            <div class="task-box" *ngFor="let item of tasks.get('Planned')" [cdkDragData]="item" cdkDrag>
-                {{item.name}}
-            </div>
+            <mat-card class="task-box" *ngFor="let item of tasks.get('Planned')" [cdkDragData]="item" cdkDrag>
+                <mat-card-title class="task-title">{{item.name}}</mat-card-title>
+                <mat-card-subtitle class="task-subtitle">
+                    Story Points: {{item.story_points}}
+                </mat-card-subtitle>
+            </mat-card>
         </div>
     </div>
 
@@ -15,9 +18,12 @@
         <div cdkDropList #InProgressList="cdkDropList" [cdkDropListData]="tasks.get('InProgress')" class="task-list"
             [cdkDropListConnectedTo]="[PlannedList, DoneList]"
             (cdkDropListDropped)="drop($event, project, 'InProgress')">
-            <div class="task-box" *ngFor="let item of tasks.get('InProgress')" [cdkDragData]="item" cdkDrag>
-                {{item.name}}
-            </div>
+            <mat-card class="task-box" *ngFor="let item of tasks.get('InProgress')" [cdkDragData]="item" cdkDrag>
+                <mat-card-title class="task-title">{{item.name}}</mat-card-title>
+                <mat-card-subtitle class="task-subtitle">
+                    Story Points: {{item.story_points}}
+                </mat-card-subtitle>
+            </mat-card>
         </div>
     </div>
 
@@ -28,7 +34,9 @@
             (cdkDropListDropped)="drop($event, project, 'Done')">
             <mat-card class="task-box" *ngFor="let item of tasks.get('Done')" [cdkDragData]="item" cdkDrag>
                 <mat-card-title class="task-title">{{item.name}}</mat-card-title>
-                <mat-card-subtitle class="task-subtitle">{{item.description}}</mat-card-subtitle>
+                <mat-card-subtitle class="task-subtitle">
+                    Story Points: {{item.story_points}}
+                </mat-card-subtitle>
             </mat-card>
         </div>
     </div>

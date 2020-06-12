@@ -30,28 +30,34 @@ const routes: Routes = [
   },
   {
     path: 'projects/:pid',
-    redirectTo: 'projects/:pid/tasks',
-    pathMatch: 'full'
-  },
-  {
-    path: 'projects/:pid/tasks',
-    component: ProjectTasksPageComponent
-  },
-  {
-    path: 'projects/:pid/members',
-    component: ProjectMembersPageComponent
-  },
-  {
-    path: 'projects/:pid/settings',
-    component: ProjectSettingsPageComponent
-  },
-  {
-    path: 'projects/:pid/sprints',
-    component: ProjectSprintsPageComponent
-  },
-  {
-    path: 'projects/:pid/sprints/:sid',
-    component: SprintBoardPageComponent
+    children: [
+      {
+        path: '',
+        redirectTo: 'tasks',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tasks',
+        component: ProjectTasksPageComponent
+      },
+      {
+        path: 'members',
+        component: ProjectMembersPageComponent
+      },
+      {
+        path: 'settings',
+        component: ProjectSettingsPageComponent,
+      },
+      {
+        path: 'sprints',
+        component: ProjectSprintsPageComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'sprints/:sid',
+        component: SprintBoardPageComponent
+      },
+    ]
   },
 ];
 

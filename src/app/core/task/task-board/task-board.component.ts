@@ -6,6 +6,8 @@ import { TaskStatus } from 'src/app/model/task-status.enum';
 import { Project } from 'src/app/model/project';
 import { Sprint } from 'src/app/model/sprint';
 import { TaskService } from 'src/app/services/task.service';
+import { ScrummyUserService } from 'src/app/services/scrummy-user.service';
+import { ScrummyUser } from 'src/app/model/scrummy-user';
 
 @Component({
   selector: 'app-task-board',
@@ -16,16 +18,16 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
   @Input() project$: Observable<Project>;
   @Input() sprint$: Observable<Sprint>;
   @Input() tasks$: Observable<Task[]>;
-  subscription: Subscription
+  task_subscr: Subscription
 
   tasks: Map<String, Task[]>;
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService, private suserService: ScrummyUserService) { }
 
   ngOnInit() {
     this.tasks = new Map();
 
-    this.subscription = this.tasks$.subscribe(all => {
+    this.task_subscr = this.tasks$.subscribe(all => {
       this.tasks.set(TaskStatus.Planned, []);
       this.tasks.set(TaskStatus.InProgress, []);
       this.tasks.set(TaskStatus.Done, []);
@@ -36,7 +38,7 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.task_subscr.unsubscribe();
   }
 
   drop(event: CdkDragDrop<string[]>, project: Project, status: string) {

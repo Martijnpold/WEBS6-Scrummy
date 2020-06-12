@@ -26,9 +26,11 @@ export class SprintBoardPageComponent implements OnInit {
   constructor(private projectService: ProjectService, private sprintService: SprintService, private taskService: TaskService, private route: ActivatedRoute, private dialog: MatDialog, private auth: AuthService) { }
 
   ngOnInit() {
-    this.user$ = this.auth.getUser();
-    this.project$ = this.projectService.get(this.route.snapshot.paramMap.get('pid'));
-    this.sprint$ = this.sprintService.get$(this.project$, this.route.snapshot.paramMap.get('sid'));
-    this.tasks$ = this.taskService.getTasksOfSprint$(this.project$, this.sprint$);
+    this.route.params.subscribe(params => {
+      this.user$ = this.auth.getUser();
+      this.project$ = this.projectService.get(params['pid']);
+      this.sprint$ = this.sprintService.get$(this.project$, params['sid']);
+      this.tasks$ = this.taskService.getTasksOfSprint$(this.project$, this.sprint$);
+    });
   }
 }
