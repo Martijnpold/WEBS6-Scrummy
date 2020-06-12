@@ -1,7 +1,11 @@
 <mat-card class="small-spacer">
-    <mat-card-title><mat-icon fontSet="fa" fontIcon="fa-running"></mat-icon> {{ sprint.name + (sprint.active ? ' (Active)' : '')}}</mat-card-title>
-    <mat-card-subtitle class="no-margin">{{sprint.startDate.toDate() | date}} to {{sprint.endDate.toDate() | date}}</mat-card-subtitle>
-    <mat-card-actions *ngIf="!sprint.active" class="no-padding">
-      <button mat-button (click)="activate()">Set as active</button>
-    </mat-card-actions>
+  <mat-card-title>
+    <mat-icon fontSet="fa" fontIcon="fa-running"></mat-icon> {{ sprint.name + (sprint.active ? ' (Active)' : '')}}
+  </mat-card-title>
+  <mat-card-subtitle class="no-margin">{{sprint.startDate.toDate() | date}} to {{sprint.endDate.toDate() | date}}
+  </mat-card-subtitle>
+  <mat-card-actions class="no-padding">
+    <button mat-button [routerLink]="'/projects/' + project.id + '/sprints/' + sprint.id">Open</button>
+    <button mat-button *ngIf="!sprint.active" (click)="activate()">Set as active</button>
+  </mat-card-actions>
 </mat-card>

@@ -34,6 +34,12 @@ export class TaskService {
     }));
   }
 
+  getTasksOfSprint$(project$: Observable<Project>, for_sprint: Observable<Sprint>, archived: boolean = false): Observable<Task[]> {
+    return for_sprint.pipe(flatMap(spr => {
+      return this.getTasks$(project$, spr, archived);
+    }));
+  }
+
   updateTask(project: Project, task: Task): Promise<void> {
     const { id, ...obj } = task;
     return this.firestore.collection('projects').doc(project.id).collection('tasks').doc(task.id).update(obj);

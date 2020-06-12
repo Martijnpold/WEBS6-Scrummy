@@ -21,6 +21,17 @@ export class SprintService {
     }));
   }
 
+  get$(project$: Observable<Project>, id: string): Observable<Sprint> {
+    return project$.pipe(flatMap((project) => {
+      return this.firestore.collection('projects').doc(project.id).collection('sprints').doc(id)
+        .valueChanges()
+        .pipe(map((project: any) => {
+          const obj = Sprint.fromDoc(id, project);
+          return obj;
+        }))
+    }));
+  }
+
   getSprints$(project$: Observable<Project>): Observable<Sprint[]> {
     return project$.pipe(flatMap(project => {
       return this.firestore.collection('projects').doc(project.id).collection('sprints')

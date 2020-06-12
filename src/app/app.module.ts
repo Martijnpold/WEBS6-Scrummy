@@ -30,6 +30,8 @@ import { SprintListComponent } from './core/sprint/sprint-list/sprint-list.compo
 import { SprintItemComponent } from './core/sprint/sprint-item/sprint-item.component';
 import { ProjectSprintsPageComponent } from './page/project/project-sprints-page/project-sprints-page.component';
 import { SprintCreateComponent } from './core/sprint/sprint-create/sprint-create.component';
+import { TaskBoardComponent } from './core/task/task-board/task-board.component';
+import { SprintBoardPageComponent } from './page/sprint-board-page/sprint-board-page.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { SprintCreateComponent } from './core/sprint/sprint-create/sprint-create
     SprintItemComponent,
     ProjectSprintsPageComponent,
     SprintCreateComponent,
+    TaskBoardComponent,
+    SprintBoardPageComponent,
   ],
   imports: [
     BrowserModule,

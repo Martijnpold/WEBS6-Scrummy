@@ -8,7 +8,7 @@
             <h3>Sprints</h3>
             <button mat-button [routerLink]="'/projects/' + project.id + '/sprints'">All Sprints</button><br>
             <span *ngFor="let sprint of sprints$ | async">
-                <button mat-button>{{sprint.active ? '> ' : '  '}}{{sprint.name}}</button><br>
+                <button mat-button [routerLink]="'/projects/' + project.id + '/sprints/' + sprint.id">{{sprint.active ? '> ' : '  '}}{{sprint.name}}</button><br>
             </span>
         </span>
     </mat-drawer>

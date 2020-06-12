@@ -7,6 +7,7 @@ import { ProjectTasksPageComponent } from './page/project/project-tasks-page/pro
 import { ProjectMembersPageComponent } from './page/project/project-members-page/project-members-page.component';
 import { ProjectSettingsPageComponent } from './page/project/project-settings-page/project-settings-page.component';
 import { ProjectSprintsPageComponent } from './page/project/project-sprints-page/project-sprints-page.component';
+import { SprintBoardPageComponent } from './page/sprint-board-page/sprint-board-page.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'projects/:pid/sprints',
     component: ProjectSprintsPageComponent
+  },
+  {
+    path: 'projects/:pid/sprints/:sid',
+    component: SprintBoardPageComponent
   },
 ];
 

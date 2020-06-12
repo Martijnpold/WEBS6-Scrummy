@@ -1,0 +1,4 @@
+<app-project-menu *ngIf="project$ | async as project" [headerTitle]="project.name + ' Sprint Board'" [project$]="project$">
+    <button mat-button class="small-spacer" [routerLink]="'/projects/' + project.id + '/sprints/'">Return to sprints</button>
+    <app-task-board [project$]="project$" [sprint$]="sprint$" [tasks$]="tasks$"></app-task-board>
+</app-project-menu>

@@ -1,0 +1,34 @@
+<div class="task-board" *ngIf="project$ | async as project">
+    <div class="task-list-box">
+        <h2 class="no-margin task-list-header">Planned</h2>
+        <div cdkDropList #PlannedList="cdkDropList" [cdkDropListData]="tasks.get('Planned')" class="task-list"
+            [cdkDropListConnectedTo]="[InProgressList, DoneList]"
+            (cdkDropListDropped)="drop($event, project, 'Planned')">
+            <div class="task-box" *ngFor="let item of tasks.get('Planned')" [cdkDragData]="item" cdkDrag>
+                {{item.name}}
+            </div>
+        </div>
+    </div>
+
+    <div class="task-list-box">
+        <h2 class="no-margin task-list-header">In Progress</h2>
+        <div cdkDropList #InProgressList="cdkDropList" [cdkDropListData]="tasks.get('InProgress')" class="task-list"
+            [cdkDropListConnectedTo]="[PlannedList, DoneList]"
+            (cdkDropListDropped)="drop($event, project, 'InProgress')">
+            <div class="task-box" *ngFor="let item of tasks.get('InProgress')" [cdkDragData]="item" cdkDrag>
+                {{item.name}}
+            </div>
+        </div>
+    </div>
+
+    <div class="task-list-box">
+        <h2 class="no-margin task-list-header">Done</h2>
+        <div cdkDropList #DoneList="cdkDropList" [cdkDropListData]="tasks.get('Done')" class="task-list"
+            [cdkDropListConnectedTo]="[PlannedList, InProgressList]"
+            (cdkDropListDropped)="drop($event, project, 'Done')">
+            <div class="task-box" *ngFor="let item of tasks.get('Done')" [cdkDragData]="item" cdkDrag>
+                {{item.name}}
+            </div>
+        </div>
+    </div>
+</div>
