@@ -11,6 +11,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { TaskCreateComponent } from 'src/app/core/task/task-create/task-create.component';
 import { Sprint } from 'src/app/model/sprint';
 import { SprintService } from 'src/app/services/sprint.service';
+import { TaskArchiveComponent } from 'src/app/core/task/task-archive/task-archive.component';
 
 @Component({
   selector: 'app-project-tasks-page',
@@ -34,5 +35,13 @@ export class ProjectTasksPageComponent implements OnInit {
 
   openCreateDialog() {
     this.dialog.open(TaskCreateComponent, { data: { 'project': this.project$ } });
+  }
+
+  openArchiveDialog(project: Project) {
+    this.dialog.open(TaskArchiveComponent, {
+      data: {
+        project_id: project.id
+      }
+    });
   }
 }

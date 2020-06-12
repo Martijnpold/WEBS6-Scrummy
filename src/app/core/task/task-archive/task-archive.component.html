@@ -1,0 +1,15 @@
+<div *ngIf="project$ | async as project" class="dialog-container">
+    <h1 mat-dialog-title class="no-margin">{{project.name}} Task Archive</h1>
+
+    <span *ngIf="tasks$ | async as tasks">
+        <mat-card class="small-spacer" *ngFor="let task of tasks">
+            <mat-card-header>
+                <mat-card-title class="no-margin">{{task.name}}</mat-card-title>
+                <mat-card-subtitle class="no-margin">Story Points {{task.story_points}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions class="no-padding">
+                <button mat-button (click)="unarchive(project, task)">RESTORE</button>
+            </mat-card-actions>
+        </mat-card>
+    </span>
+</div>

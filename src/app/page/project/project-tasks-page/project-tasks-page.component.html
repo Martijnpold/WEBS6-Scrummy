@@ -1,8 +1,11 @@
 <app-project-menu *ngIf="project$ | async as project" [headerTitle]="project.name + ' Backlog'" [project$]="project$">
     <app-task-list [project$]="project$" [active_sprint$]="active_sprint$" [tasks$]="tasks$"></app-task-list>
-    <div class="small-spacer" *ngIf="user$ | async">
-        <button mat-raised-button color="accent" (click)="openCreateDialog()">
+    <div *ngIf="user$ | async">
+        <button class="small-spacer" mat-raised-button color="accent" (click)="openCreateDialog()">
             Create Task
+        </button>
+        <button mat-raised-button color="warn" (click)="openArchiveDialog(project)">
+            View Archive
         </button>
     </div>
 </app-project-menu>
