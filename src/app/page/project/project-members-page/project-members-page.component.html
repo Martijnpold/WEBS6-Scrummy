@@ -1,3 +1,3 @@
 <app-project-menu *ngIf="project$ | async as project" [headerTitle]="project.name + ' Members'" [project$]="project$">
-    <p>project-members-page works!</p>
+    <app-member-list [members$]="members$" [project$]="project$"></app-member-list>
 </app-project-menu>

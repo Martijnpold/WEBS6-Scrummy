@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ScrummyUser } from 'src/app/model/scrummy-user';
+import { ScrummyUserService } from 'src/app/services/scrummy-user.service';
+import { first } from 'rxjs/operators';
+import { Project } from 'src/app/model/project';
+import { ToastrService } from 'ngx-toastr';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-member-list',
@@ -6,10 +13,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./member-list.component.scss']
 })
 export class MemberListComponent implements OnInit {
+  @Input() project$: Observable<Project>;
+  @Input() members$: Observable<ScrummyUser[]>;
+  invitee: String;
 
-  constructor() { }
+  constructor(private projectService: ProjectService, private suserService: ScrummyUserService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
 
+  invite(project: Project) {
+    let sub = this.suserService.getAll().subscribe(all => {
+      if (all.length <= 1) return;
+      let found = false;
+      all.forEach(el => {
+        if (el.displayName == this.invitee) {
+          if (!project.members.includes(el.id)) {
+            project.members.push(el.id);
+            this.projectService.update(project);
+            this.toastr.success(`Added ${el.displayName} to the project!`);
+            found = true;
+          }
+        }
+      });
+      if (!found) {
+        this.toastr.error(`Could not add the user '${this.invitee}'`)
+      }
+      sub.unsubscribe();
+    })
+  }
 }

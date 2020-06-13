@@ -21,6 +21,19 @@ export class ScrummyUserService {
       }));
   }
 
+  getAll(): Observable<ScrummyUser[]> {
+    return this.firestore.collection('users')
+      .snapshotChanges()
+      .pipe(map((users: any[]) => {
+        return users
+          .map(user => {
+            const doc = user.payload.doc;
+            const obj = ScrummyUser.fromDoc(doc.id, doc.data());
+            return obj;
+          })
+      }));
+  }
+
   getMembers$(project$: Observable<Project>): Observable<ScrummyUser[]> {
     return project$.pipe(flatMap(project => {
       return combineLatest(project.members.map(member => {

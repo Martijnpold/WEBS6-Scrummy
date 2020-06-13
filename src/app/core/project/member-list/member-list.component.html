@@ -1,1 +1,13 @@
-<p>member-list works!</p>
+<mat-card class="small-spacer" *ngIf="project$ | async as project">
+    <h2 class="no-margin">Current Members</h2>
+    <ul>
+        <li *ngFor="let member of members$ | async">{{member.displayName}}</li>
+    </ul>
+    <mat-form-field class="input-size">
+        <mat-label>Member Name</mat-label>
+        <input matInput [(ngModel)]="invitee">
+    </mat-form-field>
+    <button class="small-spacer" mat-raised-button [disabled]="!invitee || invitee.length == 0" color="accent" (click)="invite(project)">
+        Add User
+    </button>
+</mat-card>

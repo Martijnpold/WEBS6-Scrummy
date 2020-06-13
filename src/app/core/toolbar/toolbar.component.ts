@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
 import { User } from 'firebase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,7 +12,7 @@ import { User } from 'firebase';
 export class ToolbarComponent implements OnInit {
   user$: Observable<User>;
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -20,5 +21,6 @@ export class ToolbarComponent implements OnInit {
 
   logout() {
     this.auth.logout();
+    this.router.navigateByUrl('');
   }
 }
