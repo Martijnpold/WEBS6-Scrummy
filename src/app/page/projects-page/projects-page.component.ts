@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ScrummyUser } from 'src/app/model/scrummy-user';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/model/project';
+import { ProjectArchiveComponent } from 'src/app/core/project/project-archive/project-archive.component';
 
 @Component({
   selector: 'app-projects-page',
@@ -25,5 +26,9 @@ export class ProjectsPageComponent implements OnInit {
 
   openCreateDialog() {
     this.dialog.open(ProjectCreateComponent);
+  }
+
+  openArchiveDialog() {
+    this.dialog.open(ProjectArchiveComponent);
   }
 }

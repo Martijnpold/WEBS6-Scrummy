@@ -33,6 +33,9 @@ import { SprintCreateComponent } from './core/sprint/sprint-create/sprint-create
 import { TaskBoardComponent } from './core/task/task-board/task-board.component';
 import { SprintBoardPageComponent } from './page/sprint-board-page/sprint-board-page.component';
 import { TaskArchiveComponent } from './core/task/task-archive/task-archive.component';
+import { ProjectArchiveComponent } from './core/project/project-archive/project-archive.component';
+import { ProjectSettingsComponent } from './core/project/project-settings/project-settings.component';
+import { MemberListComponent } from './core/project/member-list/member-list.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,9 @@ import { TaskArchiveComponent } from './core/task/task-archive/task-archive.comp
     TaskBoardComponent,
     SprintBoardPageComponent,
     TaskArchiveComponent,
+    ProjectArchiveComponent,
+    ProjectSettingsComponent,
+    MemberListComponent,
   ],
   imports: [
     BrowserModule,

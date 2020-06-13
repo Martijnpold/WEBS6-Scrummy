@@ -1,0 +1,29 @@
+<div class="small-spacer" *ngIf="project$ | async as project">
+    <mat-card>
+        <mat-form-field class="input-size">
+            <mat-label>Project Name</mat-label>
+            <input matInput [(ngModel)]="project_editing.name">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-size">
+            <mat-label>Description</mat-label>
+            <textarea matInput [(ngModel)]="project_editing.description"></textarea>
+        </mat-form-field>
+        <br>
+        <br>
+
+        <button mat-raised-button color="accent" (click)="save()">
+            Save Settings
+        </button>
+        <span *ngIf="!project.archived; else unArchive">
+            <button class="small-spacer" mat-raised-button color="warn" (click)="archive(project, true)">
+                Archive Project
+            </button>
+        </span>
+        <ng-template #unArchive>
+            <button class="small-spacer" mat-raised-button color="warn" (click)="archive(project, false)">
+                Unarchive Project
+            </button>
+        </ng-template>
+    </mat-card>
+</div>
