@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { ScrummyUser } from '../model/scrummy-user';
 import { map, flatMap } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
@@ -11,7 +10,7 @@ import { Project } from '../model/project';
 })
 export class ScrummyUserService {
 
-  constructor(private firestore: AngularFirestore, private db: AngularFireDatabase) { }
+  constructor(private firestore: AngularFirestore) { }
 
   get(id: string): Observable<ScrummyUser> {
     return this.firestore.collection('users').doc(id)

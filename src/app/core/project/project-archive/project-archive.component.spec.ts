@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProjectArchiveComponent } from './project-archive.component';
+import { ProjectService } from 'src/app/services/project.service';
+import { AppMaterialModule } from 'src/app/app-material.module';
+
+const projectServiceMock = {
+
+}
 
 describe('ProjectArchiveComponent', () => {
   let component: ProjectArchiveComponent;
@@ -8,7 +14,13 @@ describe('ProjectArchiveComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectArchiveComponent ]
+      declarations: [ ProjectArchiveComponent ],
+      providers: [
+        { provide: ProjectService, useValue: projectServiceMock },
+      ],
+      imports: [
+        AppMaterialModule
+      ]
     })
     .compileComponents();
   }));
