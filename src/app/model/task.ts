@@ -25,4 +25,12 @@ export class Task {
         Object.assign(obj, { id, ...data });
         return obj;
     }
+
+    isCompleted() {
+        return status == TaskStatus.Done;
+    }
+
+    wasCompletedOn(date: Date) {
+        return this.isCompleted && this.completedOn && this.completedOn.toDate() < date;
+    }
 }

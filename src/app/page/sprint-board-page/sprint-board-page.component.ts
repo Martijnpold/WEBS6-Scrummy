@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { TaskCreateComponent } from 'src/app/core/task/task-create/task-create.component';
+import { SprintBurndownComponent } from 'src/app/core/sprint/sprint-burndown/sprint-burndown.component';
 
 @Component({
   selector: 'app-sprint-board-page',
@@ -31,6 +32,15 @@ export class SprintBoardPageComponent implements OnInit {
       this.project$ = this.projectService.get(params['pid']);
       this.sprint$ = this.sprintService.get$(this.project$, params['sid']);
       this.tasks$ = this.taskService.getTasksOfSprint$(this.project$, this.sprint$);
+    });
+  }
+
+  openBurndownDialog() {
+    this.dialog.open(SprintBurndownComponent, {
+      data: {
+        tasks$: this.tasks$,
+        sprint$: this.sprint$,
+      }
     });
   }
 }

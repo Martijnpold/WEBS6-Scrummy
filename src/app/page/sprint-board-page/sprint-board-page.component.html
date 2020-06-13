@@ -1,6 +1,7 @@
 <span *ngIf="project$ | async as project">
     <app-project-menu *ngIf="sprint$ | async as sprint" [headerTitle]="project.name + ' Sprint Board (' + sprint.name + ')'" [project$]="project$">
         <button mat-button class="small-spacer" [routerLink]="'/projects/' + project.id + '/sprints/'">Return to sprints</button>
+        <button mat-button (click)="openBurndownDialog()">View Burndown Chart</button>
         <app-task-board [project$]="project$" [sprint$]="sprint$" [tasks$]="tasks$"></app-task-board>
     </app-project-menu>
 </span>
