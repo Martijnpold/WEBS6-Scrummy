@@ -36,6 +36,7 @@ import { TaskArchiveComponent } from './core/task/task-archive/task-archive.comp
 import { ProjectArchiveComponent } from './core/project/project-archive/project-archive.component';
 import { ProjectSettingsComponent } from './core/project/project-settings/project-settings.component';
 import { MemberListComponent } from './core/project/member-list/member-list.component';
+import { SprintBurndownComponent } from './core/sprint/sprint-burndown/sprint-burndown.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { MemberListComponent } from './core/project/member-list/member-list.comp
     ProjectArchiveComponent,
     ProjectSettingsComponent,
     MemberListComponent,
+    SprintBurndownComponent,
   ],
   imports: [
     BrowserModule,

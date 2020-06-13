@@ -7,7 +7,7 @@ import { Project } from 'src/app/model/project';
 import { Sprint } from 'src/app/model/sprint';
 import { TaskService } from 'src/app/services/task.service';
 import { ScrummyUserService } from 'src/app/services/scrummy-user.service';
-import { ScrummyUser } from 'src/app/model/scrummy-user';
+import { firestore } from 'firebase';
 
 @Component({
   selector: 'app-task-board',
@@ -44,6 +44,9 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
   drop(event: CdkDragDrop<string[]>, project: Project, status: string) {
     let task = event.item.data;
     task.status = status;
+    if (status == TaskStatus.Done) {
+      task.completedOn = firestore.Timestamp.now();
+    }
     this.taskService.updateTask(project, task)
 
     if (event.previousContainer === event.container) {

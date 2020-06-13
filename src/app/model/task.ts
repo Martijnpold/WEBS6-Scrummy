@@ -11,6 +11,7 @@ export class Task {
     status: TaskStatus;
     archived: boolean;
     createdOn: firestore.Timestamp;
+    completedOn: firestore.Timestamp;
 
     constructor() {
         this.story_points = 1;
