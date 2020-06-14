@@ -46,6 +46,8 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
     task.status = status;
     if (status == TaskStatus.Done) {
       task.completedOn = firestore.Timestamp.now();
+    } else {
+      task.completedOn = null;
     }
     this.taskService.updateTask(project, task)
 

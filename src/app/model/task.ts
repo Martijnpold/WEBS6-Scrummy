@@ -26,11 +26,7 @@ export class Task {
         return obj;
     }
 
-    isCompleted() {
-        return status == TaskStatus.Done;
-    }
-
     wasCompletedOn(date: Date) {
-        return this.isCompleted() && this.completedOn && this.completedOn.toDate() < date;
+        return this.completedOn && this.completedOn.toDate() < date;
     }
 }
