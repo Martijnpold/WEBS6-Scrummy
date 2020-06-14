@@ -1,6 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
+import { of } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
+const authMock = {
+  getUser: function () {
+    return of({})
+  }
+}
+
+const routerMock = {
+  navigate: function (a) {
+  }
+}
+
+const toastrMock = {
+  success: function (msg) {
+  },
+  error: function (msg) {
+  }
+}
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -8,9 +30,14 @@ describe('RegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ]
+      declarations: [RegisterComponent],
+      providers: [
+        { provide: AuthService, useValue: authMock },
+        { provide: Router, useValue: routerMock },
+        { provide: ToastrService, useValue: toastrMock }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

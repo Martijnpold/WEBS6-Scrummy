@@ -10,7 +10,6 @@ import { TaskService } from 'src/app/services/task.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
-import { TaskCreateComponent } from 'src/app/core/task/task-create/task-create.component';
 import { SprintBurndownComponent } from 'src/app/core/sprint/sprint-burndown/sprint-burndown.component';
 
 @Component({

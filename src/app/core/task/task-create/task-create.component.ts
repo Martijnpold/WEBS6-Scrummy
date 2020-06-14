@@ -26,7 +26,7 @@ export class TaskCreateComponent implements OnInit {
   formSubscription: Subscription;
   user$: Observable<ScrummyUser>;
 
-  constructor(private auth: AuthService, private projectService: ProjectService, private taskService: TaskService, private dialogRef: MatDialogRef<ProjectCreateComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private auth: AuthService, private taskService: TaskService, private dialogRef: MatDialogRef<ProjectCreateComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.user$ = this.auth.getUser();

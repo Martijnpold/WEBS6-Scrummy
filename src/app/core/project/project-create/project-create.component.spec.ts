@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ProjectService } from 'src/app/services/project.service';
 import { AppMaterialModule } from 'src/app/app-material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ProjectCreateComponent', () => {
   let component: ProjectCreateComponent;
@@ -38,7 +39,8 @@ describe('ProjectCreateComponent', () => {
         { provide: ProjectService, useValue: projectServiceMock },
       ],
       imports: [
-        AppMaterialModule
+        AppMaterialModule,
+        BrowserAnimationsModule
       ]
     })
       .compileComponents();

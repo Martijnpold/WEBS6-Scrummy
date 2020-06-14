@@ -22,7 +22,7 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
 
   tasks: Map<String, Task[]>;
 
-  constructor(private taskService: TaskService, private suserService: ScrummyUserService) { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit() {
     this.tasks = new Map();

@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 const authMockService = {
   getUser: function () {
-    return new ScrummyUser();
+    return of(new ScrummyUser());
   }
 }
 
