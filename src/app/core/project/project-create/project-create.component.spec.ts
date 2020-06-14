@@ -23,11 +23,13 @@ describe('ProjectCreateComponent', () => {
   }
 
   const projectServiceMock = {
-
+    create: function (a) {
+    }
   }
 
   const matMockDialogRed = {
-
+    close: function () {
+    }
   }
 
   beforeEach(async(() => {
@@ -55,4 +57,26 @@ describe('ProjectCreateComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should save', () => {
+    let spy = spyOn(projectServiceMock, 'create')
+    component.createForm.get('name').setValue('some name')
+    component.createForm.get('description').setValue('some project description should go here but this is a test')
+    component.create(new ScrummyUser());
+    expect(spy.calls.count()).toBe(1);
+  })
+
+  it('should not save - Description', () => {
+    let spy = spyOn(projectServiceMock, 'create')
+    component.createForm.get('name').setValue('some name')
+    component.create(new ScrummyUser());
+    expect(spy.calls.count()).toBe(0);
+  })
+
+  it('should not save - Name', () => {
+    let spy = spyOn(projectServiceMock, 'create')
+    component.createForm.get('description').setValue('some project description should go here but this is a test')
+    component.create(new ScrummyUser());
+    expect(spy.calls.count()).toBe(0);
+  })
 });

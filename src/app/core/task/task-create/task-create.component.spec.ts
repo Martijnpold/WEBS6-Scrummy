@@ -5,10 +5,15 @@ import { of } from 'rxjs';
 import { TaskService } from 'src/app/services/task.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Task } from 'src/app/model/task';
+import { Project } from 'src/app/model/project';
+import { ScrummyUser } from 'src/app/model/scrummy-user';
 
 const taskMockService = {
   getTasksOfSprint$: function (a, b) {
     return of([{}]);
+  },
+  createTask: function (a, b) {
   }
 }
 
@@ -19,7 +24,8 @@ const authMock = {
 }
 
 const dialogMock = {
-
+  close: function () {
+  }
 }
 
 const dataMock = {
@@ -52,4 +58,37 @@ describe('TaskCreateComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should save', () => {
+    let spy = spyOn(taskMockService, 'createTask')
+    component.createForm.get('name').setValue('some name')
+    component.createForm.get('description').setValue('some task description should go here but for now we dont bother writing a good one')
+    component.createForm.get('story_points').setValue(4)
+    component.create(new ScrummyUser(), new Project());
+    expect(spy.calls.count()).toBe(1);
+  })
+
+  it('should not save - Name', () => {
+    let spy = spyOn(taskMockService, 'createTask')
+    component.createForm.get('description').setValue('some task description should go here but for now we dont bother writing a good one')
+    component.createForm.get('story_points').setValue(4)
+    component.create(new ScrummyUser(), new Project());
+    expect(spy.calls.count()).toBe(0);
+  })
+
+  it('should not save - Description', () => {
+    let spy = spyOn(taskMockService, 'createTask')
+    component.createForm.get('name').setValue('some name')
+    component.createForm.get('story_points').setValue(4)
+    component.create(new ScrummyUser(), new Project());
+    expect(spy.calls.count()).toBe(0);
+  })
+
+  it('should not save - StoryPoints', () => {
+    let spy = spyOn(taskMockService, 'createTask')
+    component.createForm.get('name').setValue('some name')
+    component.createForm.get('description').setValue('some task description should go here but for now we dont bother writing a good one')
+    component.create(new ScrummyUser(), new Project());
+    expect(spy.calls.count()).toBe(0);
+  })
 });

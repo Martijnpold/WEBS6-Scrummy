@@ -9,6 +9,11 @@ import { ToastrService } from 'ngx-toastr';
 const authMock = {
   getUser: function () {
     return of({})
+  },
+  register: function (a, b, c) {
+    return new Promise(res => {
+
+    });
   }
 }
 

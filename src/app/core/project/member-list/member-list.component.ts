@@ -39,7 +39,11 @@ export class MemberListComponent implements OnInit {
       if (!found) {
         this.toastr.error(`Could not add the user '${this.invitee}'`)
       }
-      sub.unsubscribe();
+
+      try {
+        sub.unsubscribe();
+      } catch {
+      }
     })
   }
 }

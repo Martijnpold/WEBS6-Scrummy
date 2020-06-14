@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { ScrummyUserService } from 'src/app/services/scrummy-user.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { Project } from 'src/app/model/project';
 
 const toastrMock = {
   success: function (msg) {
@@ -15,7 +16,7 @@ const toastrMock = {
 
 const suserMock = {
   getAll: function () {
-    return of([{}, {}])
+    return of([{ displayName: 'mpolder' }, { id: '1234', displayName: 'gv_sin' }])
   }
 }
 
@@ -49,4 +50,21 @@ describe('MemberListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should add', () => {
+    let spy = spyOn(projectMockService, 'update');
+    component.invitee = 'gv_sin';
+    let proj = new Project();
+    proj.members = []
+    component.invite(proj);
+    expect(spy.calls.count()).toBe(1);
+    expect(proj.members).toContain('1234');
+  })
+
+  it('should not add', () => {
+    let spy = spyOn(projectMockService, 'update');
+    component.invitee = 'gv_sinsss';
+    component.invite(new Project());
+    expect(spy.calls.count()).toBe(0);
+  })
 });

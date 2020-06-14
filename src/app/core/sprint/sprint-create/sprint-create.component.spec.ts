@@ -5,6 +5,8 @@ import { of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { SprintService } from 'src/app/services/sprint.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ScrummyUser } from 'src/app/model/scrummy-user';
+import { Project } from 'src/app/model/project';
 
 const authMock = {
   getUser: function () {
@@ -52,4 +54,37 @@ describe('SprintCreateComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  it('should save', () => {
+    let spy = spyOn(sprintMockService, 'create')
+    component.createForm.get('name').setValue('some name')
+    component.createForm.get('startDate').setValue(new Date())
+    component.createForm.get('endDate').setValue(new Date())
+    component.create(new ScrummyUser(), new Project());
+    expect(spy.calls.count()).toBe(1);
+  })
+
+  it('should not save - Name', () => {
+    let spy = spyOn(sprintMockService, 'create')
+    component.createForm.get('startDate').setValue(new Date())
+    component.createForm.get('endDate').setValue(new Date())
+    component.create(new ScrummyUser(), new Project());
+    expect(spy.calls.count()).toBe(0);
+  })
+
+  it('should not save - StartDate', () => {
+    let spy = spyOn(sprintMockService, 'create')
+    component.createForm.get('name').setValue('some name')
+    component.createForm.get('endDate').setValue(new Date())
+    component.create(new ScrummyUser(), new Project());
+    expect(spy.calls.count()).toBe(0);
+  })
+
+  it('should not save - EndDate', () => {
+    let spy = spyOn(sprintMockService, 'create')
+    component.createForm.get('name').setValue('some name')
+    component.createForm.get('startDate').setValue(new Date())
+    component.create(new ScrummyUser(), new Project());
+    expect(spy.calls.count()).toBe(0);
+  })
 });
