@@ -31,6 +31,6 @@ export class Task {
     }
 
     wasCompletedOn(date: Date) {
-        return this.isCompleted && this.completedOn && this.completedOn.toDate() < date;
+        return this.isCompleted() && this.completedOn && this.completedOn.toDate() < date;
     }
 }

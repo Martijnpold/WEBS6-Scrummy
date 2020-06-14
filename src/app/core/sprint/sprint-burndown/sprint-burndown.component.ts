@@ -70,9 +70,7 @@ export class SprintBurndownComponent implements OnInit, OnDestroy {
     // this.dataPoints[0].push({ x: start, y: this.getStoryPointsOnDay(start) })
     // this.dataPoints[0].push({ x: end, y: 0 })
 
-    console.log(this.dataPoints);
     this.chart.render();
-    console.log(this.chart);
   }
 
   getStoryPointsOnDay(date: Date) {
