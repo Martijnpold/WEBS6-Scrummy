@@ -52,11 +52,4 @@ describe('ProjectListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  // it('should have 2 courses', (done) => {
-  //   component.projects$.subscribe((p) => {
-  //     expect(p.length).toBe(2);
-  //     done();
-  //   })
-  // })
 });

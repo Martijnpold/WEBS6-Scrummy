@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Project } from '../model/project';
 import { Sprint } from '../model/sprint';
-import { flatMap, map, tap } from 'rxjs/operators';
+import { flatMap, map, tap, first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,7 @@ export class SprintService {
   }
 
   setActive(project: Project, toActivate: Sprint) {
-    this.firestore.collection('projects').doc(project.id).collection('sprints').get().subscribe(all => {
+    this.firestore.collection('projects').doc(project.id).collection('sprints').get().pipe(first()).subscribe(all => {
       all.forEach(doc => {
         let sprint = Sprint.fromDoc(doc.id, doc.data());
         if (sprint.active) {
