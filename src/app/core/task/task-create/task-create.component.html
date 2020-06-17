@@ -21,7 +21,7 @@
         <br>
         <mat-form-field appearance="fill" class="dialog-field">
             <mat-label>Story Points</mat-label>
-            <mat-select formControlName="story_points" (keydown.enter)="submitEnter($event)" class="dialog-field">
+            <mat-select type="number" formControlName="story_points" (keydown.enter)="submitEnter($event)" class="dialog-field">
                 <mat-option value="1">1</mat-option>
                 <mat-option value="2">2</mat-option>
                 <mat-option value="4">4</mat-option>

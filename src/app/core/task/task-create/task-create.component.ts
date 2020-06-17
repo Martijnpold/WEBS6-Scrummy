@@ -62,7 +62,7 @@ export class TaskCreateComponent implements OnInit {
       const task = new Task();
       task.name = this.createForm.get('name').value;
       task.description = this.createForm.get('description').value;
-      task.story_points = this.createForm.get('story_points').value;
+      task.story_points = Number(this.createForm.get('story_points').value);
       task.creator = user.id;
       this.taskService.createTask(project, task);
       this.dialogRef.close();

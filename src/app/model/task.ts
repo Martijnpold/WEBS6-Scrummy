@@ -23,6 +23,7 @@ export class Task {
     static fromDoc(id: string, data: any): Task {
         const obj = new Task();
         Object.assign(obj, { id, ...data });
+        obj.story_points = Number(obj.story_points);
         return obj;
     }
 

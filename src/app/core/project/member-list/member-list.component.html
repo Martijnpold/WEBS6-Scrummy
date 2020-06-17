@@ -7,7 +7,7 @@
         <mat-label>Member Name</mat-label>
         <input matInput [(ngModel)]="invitee">
     </mat-form-field>
-    <button class="small-spacer" mat-raised-button [disabled]="!invitee || invitee.length == 0" color="accent" (click)="invite(project)">
+    <button *ngIf="allMembers$ | async as all" class="small-spacer" mat-raised-button [disabled]="!invitee || invitee.length == 0" color="accent" (click)="invite(project, all)">
         Add User
     </button>
 </mat-card>

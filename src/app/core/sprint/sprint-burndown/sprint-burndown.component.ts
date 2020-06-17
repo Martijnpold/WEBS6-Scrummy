@@ -76,7 +76,10 @@ export class SprintBurndownComponent implements OnInit, OnDestroy {
   getStoryPointsOnDay(date: Date) {
     let total = 0;
     for (let task of this.tasks) {
+      console.log(total)
+      console.log(task)
       if (!task.wasCompletedOn(date)) {
+        console.log("finished " + total)
         total += task.story_points;
       }
     }
