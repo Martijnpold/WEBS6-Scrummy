@@ -4,12 +4,9 @@
         <div cdkDropList #PlannedList="cdkDropList" [cdkDropListData]="tasks.get('Planned')" class="task-list"
             [cdkDropListConnectedTo]="[InProgressList, DoneList]"
             (cdkDropListDropped)="drop($event, project, 'Planned')">
-            <mat-card class="task-box" *ngFor="let item of tasks.get('Planned')" [cdkDragData]="item" cdkDrag>
-                <mat-card-title class="task-title">{{item.name}}</mat-card-title>
-                <mat-card-subtitle class="task-subtitle">
-                    Story Points: {{item.story_points}}
-                </mat-card-subtitle>
-            </mat-card>
+            <div class="task-box" *ngFor="let item of tasks.get('Planned')" [cdkDragData]="item" cdkDrag>
+                <app-task-board-item [project$]="project$" [task]="item"></app-task-board-item>
+            </div>
         </div>
     </div>
 
@@ -18,12 +15,9 @@
         <div cdkDropList #InProgressList="cdkDropList" [cdkDropListData]="tasks.get('InProgress')" class="task-list"
             [cdkDropListConnectedTo]="[PlannedList, DoneList]"
             (cdkDropListDropped)="drop($event, project, 'InProgress')">
-            <mat-card class="task-box" *ngFor="let item of tasks.get('InProgress')" [cdkDragData]="item" cdkDrag>
-                <mat-card-title class="task-title">{{item.name}}</mat-card-title>
-                <mat-card-subtitle class="task-subtitle">
-                    Story Points: {{item.story_points}}
-                </mat-card-subtitle>
-            </mat-card>
+            <div class="task-box" *ngFor="let item of tasks.get('InProgress')" [cdkDragData]="item" cdkDrag>
+                <app-task-board-item [project$]="project$" [task]="item"></app-task-board-item>
+            </div>
         </div>
     </div>
 
@@ -32,12 +26,9 @@
         <div cdkDropList #DoneList="cdkDropList" [cdkDropListData]="tasks.get('Done')" class="task-list"
             [cdkDropListConnectedTo]="[PlannedList, InProgressList]"
             (cdkDropListDropped)="drop($event, project, 'Done')">
-            <mat-card class="task-box" *ngFor="let item of tasks.get('Done')" [cdkDragData]="item" cdkDrag>
-                <mat-card-title class="task-title">{{item.name}}</mat-card-title>
-                <mat-card-subtitle class="task-subtitle">
-                    Story Points: {{item.story_points}}
-                </mat-card-subtitle>
-            </mat-card>
+            <div class="task-box" *ngFor="let item of tasks.get('Done')" [cdkDragData]="item" cdkDrag>
+                <app-task-board-item [project$]="project$" [task]="item"></app-task-board-item>
+            </div>
         </div>
     </div>
 </div>

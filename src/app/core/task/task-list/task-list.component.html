@@ -17,10 +17,9 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
             <span *ngIf="project$ | async as project">
                 <td mat-cell class="controls-content" *matCellDef="let row">
-                    <!-- <button mat-mini-fab color="primary" class="button-spacer" matTooltip="Details"
-                        (click)="details(row)">
+                    <button mat-mini-fab color="primary" class="button-spacer" matTooltip="Details" (click)="details(row)">
                         <mat-icon class="button-icon" fontSet="fa" fontIcon="fa-id-card"></mat-icon>
-                    </button> -->
+                    </button>
                     <span *ngIf="active_sprint$ | async as active_sprint">
                         <button mat-mini-fab color="primary" class="button-spacer"
                             matTooltip="Add to sprint '{{active_sprint.name}}'" [disabled]="row.sprint"

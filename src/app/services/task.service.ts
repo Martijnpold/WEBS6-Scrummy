@@ -14,6 +14,17 @@ export class TaskService {
 
   constructor(private firestore: AngularFirestore) { }
 
+  get$(project$: Observable<Project>, id: string) {
+    return project$.pipe(flatMap(project => {
+      return this.firestore.collection('projects').doc(project.id).collection('tasks').doc(id)
+        .valueChanges()
+        .pipe(map((task: any) => {
+          const obj = Task.fromDoc(id, task);
+          return obj;
+        }))
+    }));
+  }
+
   getTasks$(project$: Observable<Project>, for_sprint: Sprint = null, archived: boolean = false): Observable<Task[]> {
     return project$.pipe(flatMap(project => {
       return this.firestore.collection('projects').doc(project.id).collection('tasks')

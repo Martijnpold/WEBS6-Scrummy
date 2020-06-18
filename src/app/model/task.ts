@@ -7,6 +7,7 @@ export class Task {
     description: string;
     story_points: number;
     creator: string;
+    assignee: string;
     sprint: string;
     status: TaskStatus;
     archived: boolean;

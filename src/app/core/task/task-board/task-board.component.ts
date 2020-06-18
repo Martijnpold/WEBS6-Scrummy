@@ -6,8 +6,9 @@ import { TaskStatus } from 'src/app/model/task-status.enum';
 import { Project } from 'src/app/model/project';
 import { Sprint } from 'src/app/model/sprint';
 import { TaskService } from 'src/app/services/task.service';
-import { ScrummyUserService } from 'src/app/services/scrummy-user.service';
 import { firestore } from 'firebase';
+import { TaskEditComponent } from '../task-edit/task-edit.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-task-board',
@@ -22,7 +23,7 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
 
   tasks: Map<String, Task[]>;
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.tasks = new Map();
@@ -59,5 +60,14 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex);
     }
+  }
+
+  details(task: Task) {
+    this.dialog.open(TaskEditComponent, {
+      data: {
+        project$: this.project$,
+        task_id: task.id
+      }
+    });
   }
 }

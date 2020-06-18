@@ -8,6 +8,8 @@ import { Sprint } from 'src/app/model/sprint';
 import { Project } from 'src/app/model/project';
 import { TaskService } from 'src/app/services/task.service';
 import { TaskStatus } from 'src/app/model/task-status.enum';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskEditComponent } from '../task-edit/task-edit.component';
 
 @Component({
   selector: 'app-task-list',
@@ -31,7 +33,7 @@ export class TaskListComponent implements OnInit {
     { id: 'controls' },
   ];
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<Task>();
@@ -55,8 +57,12 @@ export class TaskListComponent implements OnInit {
   }
 
   details(task: Task) {
-    console.log('details ' + Math.random())
-    console.log(task);
+    this.dialog.open(TaskEditComponent, {
+      data: {
+        project$: this.project$,
+        task_id: task.id
+      }
+    });
   }
 
   plan(project: Project, sprint: Sprint, task: Task) {

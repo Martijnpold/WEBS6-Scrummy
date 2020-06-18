@@ -1,0 +1,58 @@
+<div class="dialog-container" *ngIf="task$ | async as task">
+    <h2 mat-dialog-title>Task Overview</h2>
+
+    <form class="login-form" [formGroup]="createForm" class="dialog-field">
+        <mat-form-field appearance="fill" class="dialog-field">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" (keydown.enter)="submitEnter($event)" [(ngModel)]="task.name">
+            <mat-error>
+                {{ getNameErrorMessage() }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="dialog-field">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" (keydown.enter)="submitEnter($event)" class="dialog-field"
+                [(ngModel)]="task.description"></textarea>
+            <mat-error>
+                {{ getDescriptionErrorMessage() }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="dialog-field">
+            <mat-label>Story Points</mat-label>
+            <mat-select type="number" formControlName="story_points" (keydown.enter)="submitEnter($event)"
+                class="dialog-field" [(ngModel)]="task.story_points">
+                <mat-option [value]="1">1</mat-option>
+                <mat-option [value]="2">2</mat-option>
+                <mat-option [value]="4">4</mat-option>
+                <mat-option [value]="8">8</mat-option>
+                <mat-option [value]="16">16</mat-option>
+                <mat-option [value]="32">32</mat-option>
+                <mat-option [value]="64">64</mat-option>
+            </mat-select>
+            <mat-error>
+                {{ getStoryPointsErrorMessage() }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="dialog-field">
+            <mat-label>Assignee</mat-label>
+            <mat-select formControlName="assignee" (keydown.enter)="submitEnter($event)" class="dialog-field"
+                [(ngModel)]="task.assignee">
+                <mat-option [value]="null">Unassigned</mat-option>
+                <mat-option *ngFor="let member of members$ | async" [value]="member.id">{{member.displayName}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                {{ getStoryPointsErrorMessage() }}
+            </mat-error>
+        </mat-form-field>
+    </form>
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [disabled]="!createForm.valid" *ngIf="project$ | async as project"
+            (click)="save(project, task)" cdkFocusInitial>Save</button>
+    </mat-dialog-actions>
+</div>

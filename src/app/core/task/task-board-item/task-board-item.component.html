@@ -1,0 +1,10 @@
+<mat-card class="task-box" (click)="details()">
+    <mat-card-title class="task-title">{{task.name}}</mat-card-title>
+    <mat-card-subtitle class="task-subtitle">
+        Story Points: {{task.story_points}}
+        <span class="task-subtitle" *ngIf="assignee$ | async as assignee">
+            <br>
+            Assigned to: {{assignee.displayName}}
+        </span>
+    </mat-card-subtitle>
+</mat-card>

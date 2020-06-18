@@ -4,10 +4,14 @@ import { TaskListComponent } from './task-list.component';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from 'src/app/model/task';
 import { of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 const taskMockService = {
   updateTask: function (a, b) {
   }
+}
+
+const dialogMock = {
 }
 
 describe('TaskListComponent', () => {
@@ -18,7 +22,8 @@ describe('TaskListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [TaskListComponent],
       providers: [
-        { provide: TaskService, useValue: taskMockService }
+        { provide: TaskService, useValue: taskMockService },
+        { provide: MatDialog, useValue: dialogMock }
       ]
     })
       .compileComponents();

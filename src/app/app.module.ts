@@ -37,6 +37,8 @@ import { ProjectArchiveComponent } from './core/project/project-archive/project-
 import { ProjectSettingsComponent } from './core/project/project-settings/project-settings.component';
 import { MemberListComponent } from './core/project/member-list/member-list.component';
 import { SprintBurndownComponent } from './core/sprint/sprint-burndown/sprint-burndown.component';
+import { TaskEditComponent } from './core/task/task-edit/task-edit.component';
+import { TaskBoardItemComponent } from './core/task/task-board-item/task-board-item.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { SprintBurndownComponent } from './core/sprint/sprint-burndown/sprint-bu
     ProjectSettingsComponent,
     MemberListComponent,
     SprintBurndownComponent,
+    TaskEditComponent,
+    TaskBoardItemComponent,
   ],
   imports: [
     BrowserModule,
