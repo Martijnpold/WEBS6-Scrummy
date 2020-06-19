@@ -40,7 +40,7 @@
             <mat-label>Assignee</mat-label>
             <mat-select formControlName="assignee" (keydown.enter)="submitEnter($event)" class="dialog-field"
                 [(ngModel)]="task.assignee">
-                <mat-option [value]="null">Unassigned</mat-option>
+                <mat-option [value]="''">Unassigned</mat-option>
                 <mat-option *ngFor="let member of members$ | async" [value]="member.id">{{member.displayName}}
                 </mat-option>
             </mat-select>

@@ -19,6 +19,7 @@ export class Task {
         this.archived = false;
         this.status = TaskStatus.Todo;
         this.createdOn = firestore.Timestamp.now();
+        this.assignee = '';
     }
 
     static fromDoc(id: string, data: any): Task {
