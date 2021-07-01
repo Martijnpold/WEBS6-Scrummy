@@ -1,5 +1,10 @@
-# MyApp
+# Scrummy
 
+## What is Scrummy?
+Scrummy is a basic web-application using firebase and Angular to allow users to collaborate on a scrum board to plan and manage projects.
+
+
+## Angular
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
 
 ## Development server
