@@ -1,7 +1,7 @@
 # Scrummy
 
 ## What is Scrummy?
-Scrummy is a basic web-application using firebase and Angular to allow users to collaborate on a scrum board to plan and manage projects.
+Scrummy is a basic web-application using firebase and Angular to allow users to collaborate on a scrum board to plan and manage projects. To preview the application, view https://martijnpold.github.io/WEBS6-Scrummy/
 
 
 ## Angular
